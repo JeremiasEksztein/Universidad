@@ -201,11 +201,11 @@ int insertarEnArregloAscVoid(void* arreglo, void* elem, size_t largo, size_t tam
 
     printf("1\n");
 
-    bubbleSortVoid(arregloBytes, largo);
+    bubbleSortVoid(arregloBytes, largo, tam_elem);
 
     printf("2\n");
 
-    while(i < largo && strcmp(elem, *(arregloBytes + i)) > 0)
+    while(i < largo && memcmp(elem, *(arregloBytes + i), tam_elem) > 0)
     {
         i++;
     }
@@ -230,7 +230,7 @@ int insertarEnArregloAscVoid(void* arreglo, void* elem, size_t largo, size_t tam
 }
 
 
-int bubbleSortVoid(char** arreglo, size_t largo)
+int bubbleSortVoid(char** arreglo, size_t largo, size_t tam_elem)
 {
     int i, j;
     char* aux;
@@ -239,7 +239,7 @@ int bubbleSortVoid(char** arreglo, size_t largo)
     {
         for(j = 0; j < largo - 1 - i; j++)
         {
-            if(strcmp(*(arreglo + j), *(arreglo + j + 1)) > 0)
+            if(memcmp(*(arreglo + j), *(arreglo + j + 1), tam_elem) > 0)
             {
                 aux = *(arreglo + j);
                 *(arreglo + j) = *(arreglo + j + 1);
