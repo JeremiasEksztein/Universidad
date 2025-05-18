@@ -7,13 +7,34 @@ void mostrarArregloInt(int* arreglo, size_t tam);
 int main()
 {
     int arreglo[10] = {1, 2, 2, 2, 5, 6, 7, 8, 9, 10};
+    //float reales[5] = {5.6, 12.3, 34.24, 39.39, 20.12};
 
+    mostrarArregloInt(arreglo, 10);
+
+    int* elem = NULL;
+    *elem = 12;
+
+    insertarEnArregloVoid((void*)arreglo, (void*)elem, 0, 10, sizeof(int));
+    mostrarArregloInt(arreglo, 10);
+
+
+
+
+
+
+
+
+
+    /*
     printf("original\n");
     mostrarArregloInt(arreglo, 10);
 
-    rightShiftArrayVoid((void*)arreglo, 2, 10, sizeof(int));
+    //leftShiftArray(arreglo, 10, 10);
+    //leftShiftArrayVoid((void*)arreglo, 2, 10, sizeof(int));
 
     mostrarArregloInt(arreglo, 10);
+
+    */
 
     /*
     insertarEnArregloInt(arreglo, 11, 4, 10);

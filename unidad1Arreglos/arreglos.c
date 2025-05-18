@@ -130,40 +130,56 @@ int bubbleSort(int arreglo[], size_t largo)
 
 void* rightShiftArrayVoid(void* arreglo, int indice, size_t largo, size_t tam_elem)
 {
-    int i, aux_bytes, bytes = largo * tam_elem;
+    int i, bytes = largo * tam_elem, cont;
     char aux;
-
     char* dir = arreglo;
 
-    aux_bytes = 0;
-
-    while(aux_bytes < tam_elem)
+    for(i = bytes - 2 * tam_elem; i > indice * tam_elem; i--)
     {
-        aux = *(dir + (bytes) - 2 * tam_elem + aux_bytes);
-        *(dir + (bytes) - tam_elem + aux_bytes) = aux;
-        aux_bytes++;
+        for(cont = 0; cont < tam_elem; cont++)
+        {
+            aux = *(dir + i + cont);
+            *(dir + i + cont + tam_elem) = aux;
+        }
     }
-
-
-
-    /*
-
-    char* dir = arreglo;
-
-    aux = *(dir + (tam * tam_elem) - 2);
-    *(dir + (tam * tam_elem) - 1) = aux;
-
-    for(i = (tam * tam_elem) - 2; i > (indice * tam_elem); i--)
-    {
-        aux = *(dir + i - 1);
-        *(dir + i) = aux;
-    }*/
 
     return arreglo;
 }
 
-void* leftShiftArrayVoid(void* arreglo, int indice, size_t bytes)
+void* leftShiftArrayVoid(void* arreglo, int indice, size_t largo, size_t tam_elem)
 {
+    int i, bytes = largo * tam_elem, cont;
+    char aux;
+    char* dir = arreglo;
 
+    for(i = indice * tam_elem; i < bytes - tam_elem; i++)
+    {
+        for(cont = 0; cont < tam_elem; cont++)
+        {
+            aux = *(dir + i + cont + tam_elem);
+            *(dir + i + cont) = aux;
+        }
+    }
 
+    return arreglo;
+}
+
+int insertarEnArregloVoid(void* arreglo, void* elem, int pos, size_t largo, size_t tam_elem)
+{
+    int bytes;
+    char aux;
+    char* dir = arreglo;
+    char* dir_elem = elem;
+
+    if(pos >= largo) return -1;
+
+    rightShiftArrayVoid(arreglo, pos, largo, tam_elem);
+
+    for(bytes = 0; bytes < tam_elem; bytes++)
+    {
+        aux = *(dir_elem + bytes);
+        *(dir + pos * tam_elem + bytes) = aux;
+    }
+
+    return 0;
 }
