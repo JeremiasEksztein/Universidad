@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1747533640 source:c:\users\lenovo\onedrive\documentos\github\universidad\unidad2memoriadinamica\main.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	"memoria.h"
+
+1747533381 c:\users\lenovo\onedrive\documentos\github\universidad\unidad2memoriadinamica\memoria.h
+	<stddef.h>
+	<stdlib.h>
+
+1747535271 source:c:\users\lenovo\onedrive\documentos\github\universidad\unidad2memoriadinamica\memoria.c
+	"memoria.h"
+	<string.h>
+
