@@ -6,18 +6,23 @@ void mostrarArregloInt(int* arreglo, size_t tam);
 
 int main()
 {
-    int arreglo[10] = {1, 2, 2, 2, 5, 6, 7, 8, 9, 10};
+    int arreglo[10] = {1, 2, 9, 2, 5, 6, 7, 8, 9, 10};
     //float reales[5] = {5.6, 12.3, 34.24, 39.39, 20.12};
 
     mostrarArregloInt(arreglo, 10);
 
-    int* elem = NULL;
-    *elem = 12;
+    int elem = 13;
 
-    insertarEnArregloVoid((void*)arreglo, (void*)elem, 0, 10, sizeof(int));
+    //insertarEnArregloVoid((void*)arreglo, &elem, 2, 10, sizeof(int));
+    //mostrarArregloInt(arreglo, 10);
+
+    insertarEnArregloAscVoid((void*)arreglo, &elem, 10, sizeof(int));
+
+    printf("6\n");
+
     mostrarArregloInt(arreglo, 10);
 
-
+    printf("7\n");
 
 
 

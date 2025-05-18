@@ -25,4 +25,6 @@ int eliminarEnArregloVoid(void* arreglo, int pos, size_t largo, size_t tam_elem)
 int eliminarElementoEnArregloVoid(void* arreglo, void* elem, size_t largo, size_t tam_elem);
 int eliminarElementosEnArregloVoid(void* arreglo, void* elem, size_t largo, size_t tam_elem);
 
+int bubbleSortVoid(char** arreglo, size_t largo);
+
 #endif // ARREGLOS_H_INCLUDED

@@ -1,13 +1,13 @@
 # depslib dependency file v1.0
-1747580026 source:c:\users\lenovo\onedrive\documentos\github\universidad\unidad1arreglos\main.c
+1747581500 source:c:\users\lenovo\onedrive\documentos\github\universidad\unidad1arreglos\main.c
 	<stdio.h>
 	<stdlib.h>
 	"arreglos.h"
 
-1747579963 source:c:\users\lenovo\onedrive\documentos\github\universidad\unidad1arreglos\arreglos.c
+1747581323 source:c:\users\lenovo\onedrive\documentos\github\universidad\unidad1arreglos\arreglos.c
 	"arreglos.h"
 
-1747579939 c:\users\lenovo\onedrive\documentos\github\universidad\unidad1arreglos\arreglos.h
+1747580945 c:\users\lenovo\onedrive\documentos\github\universidad\unidad1arreglos\arreglos.h
 	<stddef.h>
 	<string.h>
 

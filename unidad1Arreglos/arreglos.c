@@ -1,4 +1,5 @@
 #include "arreglos.h"
+#include <stdio.h>
 
 int* rightShiftArray(int* arreglo, int indice, size_t tam)
 {
@@ -179,6 +180,73 @@ int insertarEnArregloVoid(void* arreglo, void* elem, int pos, size_t largo, size
     {
         aux = *(dir_elem + bytes);
         *(dir + pos * tam_elem + bytes) = aux;
+    }
+
+    return 0;
+}
+
+int insertarEnArregloAscVoid(void* arreglo, void* elem, size_t largo, size_t tam_elem)
+{
+    int i = 0, maximo = 0, bytes;
+
+    char aux;
+    char** arregloBytes = arreglo;
+    char* dir = arreglo;
+    char* dir_elem = elem;
+
+    for(i = 1; i < largo; i++)
+    {
+        *(arregloBytes + i) = (arreglo + i * tam_elem);
+    }
+
+    printf("1\n");
+
+    bubbleSortVoid(arregloBytes, largo);
+
+    printf("2\n");
+
+    while(i < largo && strcmp(elem, *(arregloBytes + i)) > 0)
+    {
+        i++;
+    }
+
+    printf("3\n");
+
+    if(i == largo) maximo = 1;
+
+    rightShiftArrayVoid(arreglo, i - maximo, largo, tam_elem);
+
+    printf("4\n");
+
+    for(bytes = 0; bytes < tam_elem; bytes++)
+    {
+        aux = *(dir_elem + bytes);
+        *(dir + i - maximo + bytes) = aux;
+    }
+
+    printf("5\n");
+
+    return 0;
+}
+
+
+int bubbleSortVoid(char** arreglo, size_t largo)
+{
+    int i, j;
+    char* aux;
+
+    for(i = 0; i < largo - 1; i++)
+    {
+        for(j = 0; j < largo - 1 - i; j++)
+        {
+            if(strcmp(*(arreglo + j), *(arreglo + j + 1)) > 0)
+            {
+                aux = *(arreglo + j);
+                *(arreglo + j) = *(arreglo + j + 1);
+                *(arreglo + j + 1) = aux;
+            }
+        }
+
     }
 
     return 0;
