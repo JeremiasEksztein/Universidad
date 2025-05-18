@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1747540079 source:c:\users\lenovo\onedrive\documentos\github\universidad\unidad3parametros\main.c
+	<stdio.h>
+	<stdlib.h>
+	"parametros.h"
+
+1747539608 source:c:\users\lenovo\onedrive\documentos\github\universidad\unidad3parametros\parametros.c
+	"parametros.h"
+
+1747538443 c:\users\lenovo\onedrive\documentos\github\universidad\unidad3parametros\parametros.h
+	<stddef.h>
+	<stdio.h>
+
