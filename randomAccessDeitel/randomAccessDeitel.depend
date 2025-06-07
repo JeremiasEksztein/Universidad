@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1747705871 source:c:\users\lenovo\onedrive\documentos\github\universidad\randomaccessdeitel\main.c
+	<stdio.h>
+	<stdlib.h>
+	"fileHandling.h"
+
+1747704554 c:\users\lenovo\onedrive\documentos\github\universidad\randomaccessdeitel\filehandling.h
+	<stdio.h>
+
