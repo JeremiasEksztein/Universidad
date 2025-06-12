@@ -53,6 +53,4 @@ void vectorMostrar(const Vector* vector, Imprimir imprimir);
 
 size_t max(size_t a, size_t b);
 
-
-#endif // VECTOR_H
 #endif // VECTOR_H
