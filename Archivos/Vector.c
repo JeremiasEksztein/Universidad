@@ -3,14 +3,12 @@
 #include <string.h>
 #include "Vector.h"
 
-
 bool redimensionarVector(Vector* vector, int operacion);
 void ordenarBurbujeo(Vector* vector);
 void ordenarSeleccion(Vector* vector, Cmp cmp);
 void ordenarInsercion(Vector* vector);
 void intercambiar(void* a, void* b, size_t tamElem);
 void* buscarMenor(void* ini, void* fin, Cmp cmp, size_t tamElem);
-
 
 bool vectorCrear(Vector* vector, size_t tamElem)
 {
@@ -335,3 +333,4 @@ void intercambiar(void* a, void* b, size_t tamElem)
     memcpy(b, aTemp, tamElem);
     free(aTemp);
 }
+
