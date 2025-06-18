@@ -1,204 +1,367 @@
 #include "vector.h"
-#include <stdlib.h>
-#include <string.h>
 
-Vector* crearVector(size_t cantInicial, size_t tamElem)
+/*Probado*/
+Vector *crearVector(Vector *vec, size_t tamElem)
 {
-    /*
-    vec->data = malloc(tamElem * cantInicial);
+	vec = malloc(sizeof(Vector));
 
-    if(!(vec->data)) return NULL;
-    */
-    Vector* vec = NULL;
+	if (!vec)
+		return NULL;
 
-    vec->data = malloc(tamElem * cantInicial);
+	vec->data = malloc(tamElem * DEFAULT_CAP);
 
-    if(!(vec->data)) return NULL;
+	if (!(vec->data)) {
+		free(vec);
+		return NULL;
+	}
 
-    vec->cantElem = cantInicial;
-    vec->tamElem = tamElem;
-    vec->cap = (cantInicial > MINIMUM_CAP) ? cantInicial : MINIMUM_CAP;
+	vec->cursor = 0;
+	vec->tamElem = tamElem;
+	vec->cantElem = 0;
+	vec->cap = DEFAULT_CAP;
 
-    return vec;
+	return vec;
 }
 
-int inicializarVector(Vector* vec, void* elem)
+/*Probado*/
+int destruirVector(Vector *vec)
 {
-    size_t i, tamElem = vec->tamElem;
-    char* tmpVec = vec->data;
-    char* tmpElem = elem;
+	free(vec->data);
 
-    /*if(_chequeoDeTamAux(elem, tamElem)) return ERROR;*/
-
-    for(i = 0; i < vec->cantElem; i++){
-        memcpy(tmpVec, tmpElem, tamElem);
-        tmpVec += tamElem;
-    }
-
-    return EXITO;
+	return EXITO;
 }
 
-/*A terminar*/
-int inicializarVectorDeArchivo(Vector* vec, FILE* arch, size_t archTam)
+/*Probado*/
+int vectorGuardarTexto(Vector *vec, const char *path, FileRead fReadFunc)
 {
-    return EXITO;
+	FILE *arch = fopen(path, "rt");
+
+	if (!arch)
+		return ERROR;
+
+	void *tmp = malloc(vec->tamElem);
+
+	fReadFunc(arch, tmp);
+	vectorAgregar(vec, tmp);
+
+	while (!feof(arch)) {
+		fReadFunc(arch, tmp);
+		vectorAgregar(vec, tmp);
+	}
+
+	fclose(arch);
+	free(tmp);
+
+	return EXITO;
 }
 
-/*A terminar*/
-int grabarVectorEnArchivo(Vector* vec, FILE* arch, size_t archTam)
+/*Probado*/
+int vectorCargarTexto(Vector *vec, const char *path, FileWrite fWriteFunc)
 {
-    return EXITO;
+	FILE *arch = fopen(path, "wb");
+
+	if (!arch)
+		return ERROR;
+
+	char *tmpData = NULL;
+	char *tmpUlt = vec->data + (vec->cantElem - 1) * vec->tamElem;
+
+	for (tmpData = vec->data; tmpData <= tmpUlt; tmpData += vec->tamElem) {
+		fWriteFunc(arch, tmpData);
+	}
+
+	fclose(arch);
+
+	return EXITO;
 }
 
-int pop(Vector* vec, void* elem, void* aux, int pos)
+/*Probado*/
+int vectorGuardarBinario(Vector *vec, const char *path)
 {
-    if(pos < 0 || pos >= vec->cantElem) return ERROR;
+	FILE *arch = fopen(path, "rb");
 
-    char* tmpData = vec->data;
-    char* tmpElem = elem;
-    char* tmpAux = aux;
+	if (!arch)
+		return ERROR;
 
-    tmpData += pos * vec->tamElem;
+	fseek(arch, 0, SEEK_END);
+	size_t archTam = ftell(arch) / vec->tamElem;
 
-    memcpy(tmpAux, tmpData, vec->tamElem);
-    puts("a");
-    memcpy(tmpData, tmpElem, vec->tamElem);
-    puts("b");
+	if (vec->cap <= archTam) {
+		vectorRedimensionar(vec, archTam * FACTOR_INCR_FILE);
+	}
 
-    return EXITO;
+	fread(vec->data, vec->tamElem, archTam, arch);
+
+	fclose(arch);
+
+	return EXITO;
 }
 
-/*A terminar
-int empujarEnVector(Vector* vec, void* elem)
+/*Probado*/
+int vectorCargarBinario(Vector *vec, const char *path)
 {
-    size_t i;
-    char* tmpData = vec->data;
-    char* tmpElem = elem;
-    chaR* tmpAux;
+	FILE *arch = fopen(path, "wb");
 
-    _threshold(vec);
+	if (!arch)
+		return ERROR;
 
-//    memcpy(vec->data, tmpElem, vec->tamElem);
+	fwrite(vec->data, vec->tamElem, vec->cantElem, arch);
 
-    tmpAux = pop(vec, tmpElem, 0);
+	fclose(arch);
 
-    for(i = 1; i < vec->cantElem; i++){
-        tmpAux = pop(vec, tmpAux, i);
-    }
-
-    return EXITO;
-}*/
-
-/*A terminarr*/
-int apilarEnVector(Vector* vec, void* elem)
-{
-    if(_chequeoDeTamAux(elem, vec->tamElem)) return ERROR;
-
-
-
-
-    return EXITO;
+	return EXITO;
 }
 
-/*A terminar*/
-int insertarEnVectorAsc(Vector* vec, void* elem, Cmp cmpFunc)
+/*Probado*/
+int vectorReiniciarCursor(Vector *vec)
 {
-    return EXITO;
+	vec->cursor = 0;
+	return EXITO;
 }
 
-/*A terminar*/
-int insertarEnVectorDsc(Vector* vec, void* elem, Cmp cmpFunc)
+/*Probado*/
+int vectorLeer(Vector *vec, void *dest)
 {
-    return EXITO;
+	if (vectorCursorAlFinal(vec))
+		return ERROR;
+
+	char *tmpData = vec->data;
+
+	tmpData += vec->cursor * vec->tamElem;
+
+	memcpy(dest, tmpData, vec->tamElem);
+
+	vec->cursor++;
+
+	return EXITO;
 }
 
-/*A terminar*/
-int insertarEnVectorPos(Vector* vec, void* elem, int pos)
+/*Probado*/
+int vectorEscribir(Vector *vec, void *src)
 {
-    return EXITO;
+	if (vectorCursorAlFinal(vec))
+		return ERROR;
+
+	char *tmpData = vec->data;
+
+	tmpData += vec->cursor * vec->tamElem;
+
+	memcpy(tmpData, src, vec->tamElem);
+
+	vec->cursor++;
+
+	return EXITO;
 }
 
-/*A terminar*/
-int eliminarEnVector(Vector* vec, void* elem, Cmp cmpFunc)
+/*Probado*/
+int vectorMover(Vector *vec, size_t pos)
 {
-    return EXITO;
+	if (pos < 0 || pos > vec->cantElem)
+		return ERROR;
+
+	vec->cursor = pos;
+
+	return EXITO;
 }
 
-int eliminarEnVectorPos(Vector* vec, int pos)
+/*Probado*/
+size_t vectorPosCursor(Vector *vec)
 {
-    return EXITO;
+	return vec->cursor;
 }
 
-void mostrarVector(Vector* vec, Imprimir imprFunc)
+/*Probado*/
+int vectorCursorAlFinal(Vector *vec)
 {
-    size_t i;
-    char* tmp = vec->data;
+	if (vec->cursor == vec->cantElem)
+		return 1;
 
-    for(i = 0; i < vec->cantElem; i++){
-        imprFunc((void*) tmp + i * vec->tamElem);
-    }
+	return 0;
 }
 
-int destruirVector(Vector* vec)
+/*Probado*/
+int vectorAgregar(Vector *vec, void *elem)
 {
-    free(vec->data);
+	if (vec->cantElem == vec->cap) {
+		if (vectorRedimensionar(vec, vec->cap * FACTOR_INCR))
+			return ERROR;
+	}
 
-    vec->tamElem = 0;
-    vec->cantElem = 0;
-    vec->cap = 0;
+	char *tmpData = vec->data;
+	char *tmpElem = elem;
 
-    return EXITO;
+	tmpData += vec->cantElem * vec->tamElem;
+
+	memcpy(tmpData, tmpElem, vec->tamElem);
+
+	vec->cantElem++;
+
+	return EXITO;
 }
 
-int _chequeoDeTamAux(void* a, size_t tam)
+/*Probado*/
+int vectorEliminarUltimo(Vector *vec)
 {
-    char* tmp = a;
+	char *tmpData = vec->data;
 
-    if(sizeof(tmp) != tam) return ERROR;
+	tmpData += (vec->cantElem - 1) * vec->tamElem;
 
-    return EXITO;
+	/*memset(tmpData, 0, vec->tamElem);*/
+
+	vec->cantElem--;
+
+	return EXITO;
 }
 
-int _threshold(Vector* vec)
+/*Probado*/
+void *vectorObtener(Vector *vec, size_t pos)
 {
-    if(vec->cantElem == vec->cap){
-        _redimensionarVector(vec, INCREMENTO);
-    }else if(vec->cantElem / vec->cap <= MIN_THRESHOLD){
-        _redimensionarVector(vec, DECREMENTO);
-    }
+	if (pos < 0 || pos > vec->cantElem)
+		return NULL;
 
-    return EXITO;
+	char *tmpData = vec->data;
+
+	tmpData += pos * vec->tamElem;
+
+	return tmpData;
 }
 
-int _redimensionarVector(Vector* vec, int modif)
+/*Probado*/
+int vectorModificar(Vector *vec, void *elem, size_t pos)
 {
-    void* tmpData;
-    size_t tmpCap;
+	if (pos < 0 || pos > vec->cantElem)
+		return ERROR;
 
-    switch(modif){
+	char *tmpData = vec->data;
 
-    case 1:
-        tmpData = realloc(vec->data, vec->cap * FACTOR_INCR);
-        tmpCap = vec->cap * FACTOR_INCR;
-    case 2:
-        tmpData = realloc(vec->data, vec->cap * FACTOR_DECR);
-        tmpCap = vec->cap * FACTOR_DECR;
-    default:
-        return ERROR;
-    }
+	tmpData += pos * vec->tamElem;
 
-    if(!tmpData) return ERROR;
+	memcpy(tmpData, elem, vec->tamElem);
 
-    vec->data = tmpData;
-    vec->cap = tmpCap;
-
-    return EXITO;
+	return EXITO;
 }
 
-/*
-int _chequeDeCapAux(size_t cantElem, size_t cap)
+/*Probado*/
+int vectorVaciar(Vector *vec)
 {
-    if(cantElem == cap) return LIMITE_DEL_VECTOR;
+	vec->cantElem = 0;
 
-    return EXITO;
-}*/
+	return EXITO;
+}
+
+/*Probado*/
+int vectorRedimensionar(Vector *vec, size_t nuevaCap)
+{
+	if (nuevaCap < 0 || nuevaCap > MAXIMUM_CAP)
+		return ERROR;
+
+	void *tmp = realloc(vec->data, nuevaCap * vec->tamElem);
+
+	if (!tmp)
+		return ERROR;
+
+	vec->data = tmp;
+	vec->cap = nuevaCap;
+
+	return EXITO;
+}
+
+/*Probado*/
+int vectorBuscar(Vector *vec, void *clave, Comparar cmpFunc)
+{
+	int pos = -1, i = 0;
+	char *tmpData = vec->data;
+	char *tmpUlt = vec->data + (vec->cantElem - 1) * vec->tamElem;
+
+	while (tmpData < tmpUlt && pos == -1) {
+		if (!cmpFunc(tmpData, clave)) {
+			pos = i;
+		}
+		i++;
+		tmpData += vec->tamElem;
+	}
+
+	return pos;
+}
+
+/*Probado*/
+int vectorOrdenar(Vector *vec, Comparar cmpFunc)
+{
+	char *tmpI = NULL;
+	char *tmpJ = NULL;
+	char *tmpUlt = vec->data + (vec->cantElem - 1) * vec->tamElem;
+	char *tmpLimJ = tmpUlt;
+
+	for (tmpI = vec->data; tmpI < tmpUlt;
+	     tmpI += vec->tamElem, tmpLimJ -= vec->tamElem) {
+		for (tmpJ = vec->data; tmpJ < tmpLimJ; tmpJ += vec->tamElem) {
+			if (cmpFunc(tmpJ, tmpJ + vec->tamElem) > 0) {
+				intercambiar(tmpJ, tmpJ + vec->tamElem,
+					     vec->tamElem);
+			}
+		}
+	}
+
+	return EXITO;
+}
+
+/*Probado*/
+int intercambiar(void *a, void *b, size_t tamElem)
+{
+	char *tmp = malloc(tamElem);
+
+	memcpy(tmp, a, tamElem);
+	memcpy(a, b, tamElem);
+	memcpy(b, tmp, tamElem);
+
+	free(tmp);
+
+	return EXITO;
+}
+
+/*Probado*/
+int vectorRecorrer(Vector *vec, Accion actFunc)
+{
+	char *tmpData = NULL;
+	char *tmpUlt = vec->data + (vec->cantElem - 1) * vec->tamElem;
+
+	for (tmpData = vec->data; tmpData < tmpUlt; tmpData += vec->tamElem) {
+		actFunc(tmpData);
+	}
+
+	return EXITO;
+}
+
+/*Probado*/
+int mostrarVector(Vector *vec, Imprimir imprFunc)
+{
+	if (vec->cantElem == 0)
+		return ERROR;
+
+	char *tmpData = NULL;
+	char *tmpUlt = vec->data + vec->cantElem * vec->tamElem;
+
+	for (tmpData = vec->data; tmpData < tmpUlt; tmpData += vec->tamElem) {
+		imprFunc(tmpData);
+	}
+
+	return EXITO;
+}
+
+/*Probado*/
+size_t vectorTam(Vector *vec)
+{
+	return vec->cantElem;
+}
+
+/*Probado*/
+size_t vectorCapacidad(Vector *vec)
+{
+	return vec->cap;
+}
+
+/*Probado*/
+int vectorVacio(Vector *vec)
+{
+	return (vec->cantElem) ? 0 : 1;
+}
