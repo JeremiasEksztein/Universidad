@@ -1,24 +1,204 @@
 #include "vector.h"
+#include <stdlib.h>
+#include <string.h>
 
-bool crearVector(Vector* vector, size_t tamElem)
+Vector* crearVector(size_t cantInicial, size_t tamElem)
 {
-    vector->vec = malloc(tamElem * CREACION);
+    /*
+    vec->data = malloc(tamElem * cantInicial);
 
-    if(vector->vec == NULL) return false;
+    if(!(vec->data)) return NULL;
+    */
+    Vector* vec = NULL;
 
-    vector->cap = CREACION;
-    vector->tamElem = tamElem;
-    vector->ce = 0;
+    vec->data = malloc(tamElem * cantInicial);
 
-    return true;
+    if(!(vec->data)) return NULL;
+
+    vec->cantElem = cantInicial;
+    vec->tamElem = tamElem;
+    vec->cap = (cantInicial > MINIMUM_CAP) ? cantInicial : MINIMUM_CAP;
+
+    return vec;
 }
 
-void destruirVector(Vector* vector)
+int inicializarVector(Vector* vec, void* elem)
 {
-    free(vector->vec);
+    size_t i, tamElem = vec->tamElem;
+    char* tmpVec = vec->data;
+    char* tmpElem = elem;
 
-    vector->vec = NULL;
-    vector->cap = 0;
-    vector->ce = 0;
-    vector->tamElem = 0;
+    /*if(_chequeoDeTamAux(elem, tamElem)) return ERROR;*/
+
+    for(i = 0; i < vec->cantElem; i++){
+        memcpy(tmpVec, tmpElem, tamElem);
+        tmpVec += tamElem;
+    }
+
+    return EXITO;
 }
+
+/*A terminar*/
+int inicializarVectorDeArchivo(Vector* vec, FILE* arch, size_t archTam)
+{
+    return EXITO;
+}
+
+/*A terminar*/
+int grabarVectorEnArchivo(Vector* vec, FILE* arch, size_t archTam)
+{
+    return EXITO;
+}
+
+int pop(Vector* vec, void* elem, void* aux, int pos)
+{
+    if(pos < 0 || pos >= vec->cantElem) return ERROR;
+
+    char* tmpData = vec->data;
+    char* tmpElem = elem;
+    char* tmpAux = aux;
+
+    tmpData += pos * vec->tamElem;
+
+    memcpy(tmpAux, tmpData, vec->tamElem);
+    puts("a");
+    memcpy(tmpData, tmpElem, vec->tamElem);
+    puts("b");
+
+    return EXITO;
+}
+
+/*A terminar
+int empujarEnVector(Vector* vec, void* elem)
+{
+    size_t i;
+    char* tmpData = vec->data;
+    char* tmpElem = elem;
+    chaR* tmpAux;
+
+    _threshold(vec);
+
+//    memcpy(vec->data, tmpElem, vec->tamElem);
+
+    tmpAux = pop(vec, tmpElem, 0);
+
+    for(i = 1; i < vec->cantElem; i++){
+        tmpAux = pop(vec, tmpAux, i);
+    }
+
+    return EXITO;
+}*/
+
+/*A terminarr*/
+int apilarEnVector(Vector* vec, void* elem)
+{
+    if(_chequeoDeTamAux(elem, vec->tamElem)) return ERROR;
+
+
+
+
+    return EXITO;
+}
+
+/*A terminar*/
+int insertarEnVectorAsc(Vector* vec, void* elem, Cmp cmpFunc)
+{
+    return EXITO;
+}
+
+/*A terminar*/
+int insertarEnVectorDsc(Vector* vec, void* elem, Cmp cmpFunc)
+{
+    return EXITO;
+}
+
+/*A terminar*/
+int insertarEnVectorPos(Vector* vec, void* elem, int pos)
+{
+    return EXITO;
+}
+
+/*A terminar*/
+int eliminarEnVector(Vector* vec, void* elem, Cmp cmpFunc)
+{
+    return EXITO;
+}
+
+int eliminarEnVectorPos(Vector* vec, int pos)
+{
+    return EXITO;
+}
+
+void mostrarVector(Vector* vec, Imprimir imprFunc)
+{
+    size_t i;
+    char* tmp = vec->data;
+
+    for(i = 0; i < vec->cantElem; i++){
+        imprFunc((void*) tmp + i * vec->tamElem);
+    }
+}
+
+int destruirVector(Vector* vec)
+{
+    free(vec->data);
+
+    vec->tamElem = 0;
+    vec->cantElem = 0;
+    vec->cap = 0;
+
+    return EXITO;
+}
+
+int _chequeoDeTamAux(void* a, size_t tam)
+{
+    char* tmp = a;
+
+    if(sizeof(tmp) != tam) return ERROR;
+
+    return EXITO;
+}
+
+int _threshold(Vector* vec)
+{
+    if(vec->cantElem == vec->cap){
+        _redimensionarVector(vec, INCREMENTO);
+    }else if(vec->cantElem / vec->cap <= MIN_THRESHOLD){
+        _redimensionarVector(vec, DECREMENTO);
+    }
+
+    return EXITO;
+}
+
+int _redimensionarVector(Vector* vec, int modif)
+{
+    void* tmpData;
+    size_t tmpCap;
+
+    switch(modif){
+
+    case 1:
+        tmpData = realloc(vec->data, vec->cap * FACTOR_INCR);
+        tmpCap = vec->cap * FACTOR_INCR;
+    case 2:
+        tmpData = realloc(vec->data, vec->cap * FACTOR_DECR);
+        tmpCap = vec->cap * FACTOR_DECR;
+    default:
+        return ERROR;
+    }
+
+    if(!tmpData) return ERROR;
+
+    vec->data = tmpData;
+    vec->cap = tmpCap;
+
+    return EXITO;
+}
+
+/*
+int _chequeDeCapAux(size_t cantElem, size_t cap)
+{
+    if(cantElem == cap) return LIMITE_DEL_VECTOR;
+
+    return EXITO;
+}*/

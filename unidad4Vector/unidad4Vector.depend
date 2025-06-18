@@ -1,13 +1,15 @@
 # depslib dependency file v1.0
-1748556204 source:c:\users\lenovo\onedrive\documentos\github\universidad\unidad4vector\vector.c
+1749853678 source:c:\users\lenovo\onedrive\documentos\github\universidad\unidad4vector\vector.c
 	"vector.h"
+	<stdlib.h>
+	<string.h>
 
-1748555843 c:\users\lenovo\onedrive\documentos\github\universidad\unidad4vector\vector.h
+1749853696 c:\users\lenovo\onedrive\documentos\github\universidad\unidad4vector\vector.h
+	<stddef.h>
 	<stdio.h>
 	<stdlib.h>
-	<stdbool.h>
 
-1748556263 source:c:\users\lenovo\onedrive\documentos\github\universidad\unidad4vector\main.c
+1749853489 source:c:\users\lenovo\onedrive\documentos\github\universidad\unidad4vector\main.c
 	<stdio.h>
 	<stdlib.h>
 	"vector.h"
