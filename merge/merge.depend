@@ -1,0 +1,12 @@
+# depslib dependency file v1.0
+1750340520 source:c:\users\lenovo\onedrive\documentos\github\universidad\merge\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"vector.h"
+
+1750003625 c:\users\lenovo\onedrive\documentos\github\universidad\merge\vector.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
