@@ -9,4 +9,5 @@
 - Completar los ejercicios de recursividad
 - Implementar la libreria strings
 - Armar los algoritmos de ordenamiento generico (Selection sort e Insertion Sort)
-- Hacer el TP por mi cuenta
+- Implementar algunos merge para practicar.
+- Hacer el TP por mi cuenta.
