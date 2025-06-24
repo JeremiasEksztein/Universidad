@@ -10,4 +10,5 @@
 - Implementar la libreria strings
 - Armar los algoritmos de ordenamiento generico (Selection sort e Insertion Sort)
 - Implementar algunos merge para practicar.
-- Hacer el TP por mi cuenta.
+- Hacer el TP por mi cuenta. !!
+- Revisar el TP que hicieron !!
