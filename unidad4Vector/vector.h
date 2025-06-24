@@ -23,7 +23,6 @@ typedef void (*Imprimir)(const void*);
 typedef void (*FileRead)(FILE*, void*);
 typedef void (*FileWrite)(FILE*, void*);
 
-
 /*Struct vector*/
 typedef struct{
     void* data;
@@ -33,7 +32,11 @@ typedef struct{
     size_t cap;
 }Vector;
 
-/*Creacion y destruccion*/
+/*@brief Funcion creador del TDA Vector
+* @param Puntero a vector
+* @param Tamaño de lo elementos del vector
+* @return Puntero al vector creado
+*/
 Vector* crearVector(Vector* vec, size_t tamElem);
 int destruirVector(Vector* vec);
 

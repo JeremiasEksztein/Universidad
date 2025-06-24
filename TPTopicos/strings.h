@@ -1,0 +1,8 @@
+#ifndef STRINGS_H_INCLUDED
+#define STRINGS_H_INCLUDED
+
+
+
+    
+
+#endif // STRINGS_H_INCLUDED

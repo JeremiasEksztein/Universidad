@@ -1,6 +1,8 @@
 #ifndef STRINGS_H_INCLUDED
 #define STRINGS_H_INCLUDED
 
+#include <stdlib.h>
+
 //Deben estar las funciones de strings, memory, y chars
 
 //Strings
@@ -13,7 +15,7 @@ char* stringNCopy(char* dest, const char* src, size_t count);
 //Return a pointer to the beginning of dest, after having concatenated src unto dest
 char* stringCat(char* dest, const char* src);
 //Returns a pointer to the beginning of dest, after having concatenated up to count bytes from src unto dest
-char* stringNCat(char* dest, constr char* src, size_t count);
+char* stringNCat(char* dest, const char* src, size_t count);
 //Returns a pointer to the duplicate string of src
 char* stringDup(const char* src);
 //Returns a pointer to the duplicate string of src up to size bytes

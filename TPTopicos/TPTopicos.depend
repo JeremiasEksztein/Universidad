@@ -1,0 +1,24 @@
+# depslib dependency file v1.0
+1750434010 source:c:\users\lenovo\onedrive\documentos\github\universidad\tptopicos\strings.c
+	"strings.h"
+
+1750434010 c:\users\lenovo\onedrive\documentos\github\universidad\tptopicos\strings.h
+
+1750434016 source:c:\users\lenovo\onedrive\documentos\github\universidad\tptopicos\funciones.c
+	"funciones.h"
+
+1750447800 c:\users\lenovo\onedrive\documentos\github\universidad\tptopicos\funciones.h
+	<stdlib.h>
+	<stdio.h>
+
+1750434028 source:c:\users\lenovo\onedrive\documentos\github\universidad\tptopicos\main.c
+	<stdio.h>
+	<stdlib.h>
+	"funciones.h"
+	"vector.h"
+
+1750434983 c:\users\lenovo\onedrive\documentos\github\universidad\tptopicos\vector.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+

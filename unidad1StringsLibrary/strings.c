@@ -69,7 +69,7 @@ char* stringNCat(char* dest, const char* src, size_t count){
 char* stringDup(const char* src){
 
     size_t count = 0;
-    char* a = src;
+    const char* a = src;
 
     while(*a){
         a++;
@@ -95,7 +95,7 @@ char* stringDup(const char* src){
 char* stringNDup(const char* src, size_t size){
 
     size_t count = 0;
-    char* a = src;
+    const char* a = src;
 
     while(*a){
         a++;
