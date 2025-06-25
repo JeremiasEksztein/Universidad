@@ -2,12 +2,14 @@
 #define CADENAS_H_INCLUDED
 
 #include <string.h>
+#include <ctype.h>
+#include <stdbool.h>
+#include <stdlib.h>
 
+//1.8
+int esPalindromo(const char* str);
 
 //1.9
-bool esLetra(char c);
-char* normalizar(char* dest, const char* orig);
-char* palabraAMayusc(char* buffer);
 
 //1.10
 

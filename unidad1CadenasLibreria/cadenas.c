@@ -373,7 +373,7 @@ char* stringSubstring(const char* str, const char* substr)
     char* tmpSubstr = (char*)substr;
 
     while(*tmpStr){
-        while(*tmpAux == *tmpSubstr){
+        while(*tmpAux == *tmpSubstr && *tmpAux && *tmpSubstr){
             tmpAux++;
             tmpSubstr++;
         }
