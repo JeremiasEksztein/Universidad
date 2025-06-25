@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1750814075 source:c:\users\lenovo\onedrive\documentos\github\universidad\unidad1cadenaslibreria\cadenas.c
+	"cadenas.h"
+
+1750806262 c:\users\lenovo\onedrive\documentos\github\universidad\unidad1cadenaslibreria\cadenas.h
+	<stdlib.h>
+	<stdio.h>
+	<ctype.h>
+
