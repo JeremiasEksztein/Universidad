@@ -1,12 +1,12 @@
 # depslib dependency file v1.0
-1750814906 source:c:\users\lenovo\onedrive\documentos\github\universidad\pruebadelalibreriastrings\main.c
+1750851133 source:c:\users\lenovo\onedrive\documentos\github\universidad\pruebadelalibreriastrings\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	<string.h>
 	"..\unidad1CadenasLibreria\cadenas.h"
 
-1750806262 c:\users\lenovo\onedrive\documentos\github\universidad\unidad1cadenaslibreria\cadenas.h
+1750848781 c:\users\lenovo\onedrive\documentos\github\universidad\unidad1cadenaslibreria\cadenas.h
 	<stdlib.h>
 	<stdio.h>
 	<ctype.h>

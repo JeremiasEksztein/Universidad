@@ -4,17 +4,27 @@
 #include <string.h>
 #include "..\unidad1CadenasLibreria\cadenas.h"
 
+int esPalindromo(const char* str);
+
 int main()
 {
-    char a[20] = "24-6-2025";
-    char* s = NULL;
-    char b[20] = "-";
-    char* c;
+    char a[] = "xanax";
 
-    stringTokenizeS(a, b, &c);
-    printf("%s\n", a);
-    stringTokenizeS(s, b, &c);
-    printf("%s\n", s);
+    printf("%d\n", esPalindromo(a));
+
 
     return 0;
+}
+
+int esPalindromo(const char* str)
+{
+    char* tmpInicio = (char*)str;
+    char* tmpFin = (char*)str + stringLen(str) - 1;
+
+    while(tmpInicio < tmpFin && *tmpInicio == *tmpFin){
+        tmpInicio++;
+        tmpFin--;
+    }
+
+    return (tmpInicio == tmpFin) ? 1 : 0;
 }

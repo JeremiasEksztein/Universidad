@@ -28,8 +28,8 @@ char* stringRChar(const char* str, int ch); //Probado
 size_t stringSpan(const char* dest, const char* src); //Probado
 size_t stringCSpan(const char* dest, const char* src); //Probado
 char* stringPBreak(const char* str, const char* breakset); //Probado
-char* stringTokenize(const char* str, const char* delim, char* memory, char* token); // A HACER
-char* stringTokenizeS(char* str, const char* delim, char** memory); // INSPIRADO EN GLIBC 
+/*char* stringTokenize(const char* str, const char* delim, char* memory, char* token); // A HACER*/
+char* stringTokenize(char* str, const char* delim, char** savePtr); // INSPIRADO EN GLIBC y OTROS
 char* stringSubstring(const char* str, const char* substr); // Probado
 char* stringSubstringI(const char* str, const char* substr); // Probado, mas o menos
 
@@ -42,6 +42,7 @@ void* memorySet(void* ptr, int ch, size_t count);
 void* memoryCopy(void* dest, const void* src, size_t count);
 void* memoryMove(void* dest, const void* src, size_t count);
 void* memoryCharCopy(void* dest, const void* src, int ch, size_t count);
+void* memoryInterchange(void* dest, void* src, size_t count);
 
 //Manejo de caracteres
 

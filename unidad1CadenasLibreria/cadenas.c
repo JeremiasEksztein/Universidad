@@ -98,23 +98,27 @@ char* stringToLower(char* str)
 
 char* stringReverse(char* str)
 {
-    //HACER
+    char* tmpFinal = str + stringLen(str) - 1;
+    char* tmpInicio = str;
 
-    return NULL;
+    while(tmpInicio < tmpFinal){
+        memoryInterchange(tmpInicio, tmpFinal, 1);
+        tmpInicio++;
+        tmpFinal--;
+    }
 
+    return str;
 }
 
 size_t stringLen(const char* str)
 {
-    size_t count = 0;
-    char* tmp = (char*)str;
+    char* tmpIni = (char*)str;
 
-    while(*tmp){
-        tmp++;
-        count++;
+    while(*str){
+        str++;
     }
 
-    return count;
+    return str - tmpIni;
 }
 
 int stringCmp(const char* lhs, const char* rhs)
@@ -250,6 +254,7 @@ char* stringPBreak(const char* str, const char* breakset)
     return NULL;
 }
 
+/*BASURA
 char* stringTokenize(const char* str, const char* delim, char* memory, char* token)
 {
     if(delim == NULL) return NULL;
@@ -290,10 +295,44 @@ char* stringTokenize(const char* str, const char* delim, char* memory, char* tok
 
     return token;
 }
+*/
 
-//SACADO DE GLIBC
-char* stringTokenizeS(char* str, const char* delim, char** memory)
+//SACADO DE GLIBC y OTROS
+char* stringTokenize(char* str, const char* delim, char** savePtr)
 {
+    char* tmpInicio = str ? str : *savePtr;
+
+    if(tmpInicio == NULL) return NULL;
+
+
+    //Mientras que tmpInicio no sea '\0' y tmpInicio pertenece a delim
+    while(*tmpInicio && stringChar(delim, *tmpInicio)){
+        tmpInicio++;
+    }
+
+    if(*tmpInicio == '\0'){
+        *savePtr = NULL;
+        return NULL;
+    }
+
+    char* tmpFinal = tmpInicio;
+
+    //Mientras que tmpFinal no sea '\0' y tmpFinal no pertenezca a delim
+    while(*tmpFinal && !stringChar(delim, *tmpFinal)){
+        tmpFinal++;
+    }
+
+    //Si tmpFinal no es '\0'
+    if(*tmpFinal){
+        *tmpFinal = '\0'; //Se sobreescribe el delimitador con '\0' para hacerla valida
+        *savePtr = tmpFinal + 1; //Se guarda el estado
+    }else{
+        *savePtr = NULL; //Se termino la tokenizacion
+    }
+
+    return tmpInicio;
+
+    /*
     char* end;
 
     if(str == NULL){
@@ -322,6 +361,7 @@ char* stringTokenizeS(char* str, const char* delim, char** memory)
     *memory = end + 1;
 
     return str;
+    */
 }
 
 char* stringSubstring(const char* str, const char* substr)
@@ -450,4 +490,19 @@ void* memoryCharCopy(void* dest, const void* src, int ch, size_t count)
     }
 
     return a;
+}
+
+void* memoryInterchange(void* dest, void* src, size_t count)
+{
+    void* tmp = malloc(count);
+
+    if(!tmp) return NULL;
+
+    memoryCopy(tmp, dest, count);
+    memoryCopy(dest, src, count);
+    memoryCopy(src, tmp, count);
+
+    free(tmp);
+
+    return dest;
 }
