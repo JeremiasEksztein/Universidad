@@ -10,4 +10,3 @@
 - Armar los algoritmos de busqueda generica (Linear search y Binary search)
 - Implementar algunos merge para practicar.
 - Hacer el TP por mi cuenta. !!
-- Revisar el TP que hicieron !!
