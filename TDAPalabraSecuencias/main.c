@@ -9,6 +9,9 @@ int main()
     char cadenaPrueba[] = "¡Hola! ...esto123 es$una++cadena@de@@#prueba---con%%palabras&y##basura.";
     char dest[50];
 
+    char cadenaPrueba2[] = "const char* cadena = "uno.dos.tres.cuatro.cinco.seis.siete.ocho.nueve.diez.";
+"
+
     printf("%s\n", cadenaPrueba);
 
     normalizarString(cadenaPrueba, dest);

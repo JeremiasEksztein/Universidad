@@ -1,0 +1,29 @@
+# depslib dependency file v1.0
+1751056000 source:c:\users\lenovo\onedrive\documentos\github\universidad\unidad5archivos\archivos.c
+	"archivos.h"
+
+1751056138 c:\users\lenovo\onedrive\documentos\github\universidad\unidad5archivos\archivos.h
+	<stdio.h>
+	<stdlib.h>
+	<stdbool.h>
+
+1751056918 source:c:\users\lenovo\onedrive\documentos\github\universidad\unidad5archivos\main.c
+	<stdio.h>
+	<stdlib.h>
+	"archivos.h"
+	"../TDAPalabraSecuencias/secuenciaPalabras.h"
+	"../unidad1CadenasLibreria/cadenas.h"
+
+1751049516 c:\users\lenovo\onedrive\documentos\github\universidad\tdapalabrasecuencias\secuenciapalabras.h
+	<stdlib.h>
+	<stdio.h>
+	"palabra.h"
+
+1751053173 c:\users\lenovo\onedrive\documentos\github\universidad\tdapalabrasecuencias\palabra.h
+	<stdio.h>
+
+1750889305 c:\users\lenovo\onedrive\documentos\github\universidad\unidad1cadenaslibreria\cadenas.h
+	<stdlib.h>
+	<stdio.h>
+	<ctype.h>
+
