@@ -1,0 +1,21 @@
+# depslib dependency file v1.0
+1751051919 source:c:\users\lenovo\onedrive\documentos\github\universidad\tdapalabrasecuencias\palabra.c
+	"palabra.h"
+	<ctype.h>
+
+1751053173 c:\users\lenovo\onedrive\documentos\github\universidad\tdapalabrasecuencias\palabra.h
+	<stdio.h>
+
+1751052462 source:c:\users\lenovo\onedrive\documentos\github\universidad\tdapalabrasecuencias\main.c
+	<stdio.h>
+	<stdlib.h>
+	"secuenciaPalabras.h"
+
+1751049516 c:\users\lenovo\onedrive\documentos\github\universidad\tdapalabrasecuencias\secuenciapalabras.h
+	<stdlib.h>
+	<stdio.h>
+	"palabra.h"
+
+1751052462 source:c:\users\lenovo\onedrive\documentos\github\universidad\tdapalabrasecuencias\secuenciapalabra.c
+	"secuenciaPalabras.h"
+

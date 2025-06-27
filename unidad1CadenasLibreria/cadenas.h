@@ -16,7 +16,7 @@ char* stringCharDup(const char* str, int ch); //Probado
 //char* stringRCharDup(const char* str, int ch); NO FUNCIONA
 char* stringToUpper(char* str); //Probado
 char* stringToLower(char* str); //Probado
-char* stringReverse(char* str); //A HACER
+char* stringReverse(char* str); //Probado
 
 size_t stringLen(const char* str); //Probado
 int stringCmp(const char* lhs, const char* rhs); //Probado

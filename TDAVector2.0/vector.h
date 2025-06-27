@@ -5,6 +5,12 @@
 #include <stdlib.h>
 #include <string.h>
 
+#define BUBBLE_SORT 0
+#define SELECTION_SORT 1
+#define INSERTION_SORT 2
+
+#define LINEAR_SEARCH 0
+#define BINARY_SEARCH 1
 
 #define DEFAULT_CAP 10
 #define MAXIMUM_CAP 1000000000 /*1 GB*/
@@ -27,7 +33,9 @@ typedef struct{
     size_t tamElem;
     size_t cantElem;
     size_t cap;
-}Vector;
+}_VectorStruct;
+
+typedef _VectorStruct Vector;
 
 /*Creacion y destruccion*/
 Vector* crearVector(Vector* vec, size_t tamElem);
@@ -60,8 +68,11 @@ int vectorVaciar(Vector* vec);
 int vectorRedimensionar(Vector* vec, size_t nuevaCap);
 
 /*Buscar y ordenar*/
+int vectorBuscar(Vector* vec, void* clave, Comparar cmpFunc, int metodo);
+int vectorOrdenar(Vector* vec, Comparar cmpFunc, int metodo);
+/*
 int vectorBuscar(Vector* vec, void* clave, Comparar cmpFunc);
-int vectorOrdenar(Vector* vec, Comparar cmpFunc);
+int vectorOrdenar(Vector* vec, Comparar cmpFunc);*/
 int intercambiar(void* a, void* b, size_t tamElem);
 
 /*Iteran por el vector?*/

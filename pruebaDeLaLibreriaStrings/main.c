@@ -22,21 +22,26 @@ char* normalizarCadena(char* str);
 char* desofuscar(char* str, char* clave);
 int desofuscarAux(int ch, int offset, char* clave);
 
+//1.11
+int cargarStrings(void);
+
 int main()
 {
     //char a[] = "aa";
     //char num[] = "68938";
     //char prueba[] = "holahhhhhhhhhhhhhhhhhhhhhhhhhhhola";
     //char busca[] = "hola";
-    //char prueba[] = "chau;chau;chau";
-    char frase[] = "Nj qemh v ljs kraenkqbres; lj oqe qemh es oqevorme sgn ellhs --Istqt Asdmgj";
-    char clave[] = "abcdghijkoqtuv";
+    char prueba[] = "C";
+    //char frase[] = "Nj qemh v ljs kraenkqbres; lj oqe qemh es oqevorme sgn ellhs --Istqt Asdmgj";
+    //char clave[] = "abcdghijkoqtuv";
 
     //printf("%d\n", esPalindromo(a));
     //printf("%d\n", stringToInt(num));
     //printf("%d\n", contarSubstrings(prueba, busca));
-    //printf("%s\n", normalizarCadena(prueba));
-    printf("%s\n", desofuscar(frase, clave));
+    printf("%s\n", normalizarCadena(prueba));
+    //printf("%s\n", desofuscar(frase, clave));
+
+    cargarStrings();
 
     return 0;
 }
@@ -129,8 +134,6 @@ char* normalizarCadena(char* str)
         tmp += stringSpan(tmp, abecedario) + 1;
     }
 
-    printf("%ld\n", (long int)stringLen(str));
-
     return str;
 }
 
@@ -158,8 +161,6 @@ char* desofuscar(char* str, char* clave)
 
         count = 0;
         tmpStr++;
-
-        printf("%c\n", *tmpStr);
     }
 
     return str;
@@ -177,4 +178,9 @@ int desofuscarAux(int ch, int offset, char* clave)
     }
 
     return *ret;
+}
+
+int cargarStrings()
+{
+    return 0;
 }
