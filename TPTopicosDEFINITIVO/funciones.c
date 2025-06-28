@@ -96,7 +96,10 @@ int corregirRegistroGeneral(void* buf)
     corregirFecha(reg->periodo);
     corregirIndice(reg->indice);
     desencriptarNivelGeneral(reg->nivel);
-    normalizarNivel(reg->nivel);
+
+    printf("%s %s %s\n", reg->periodo, reg->nivel, reg->indice);
+
+    normalizarNivel(reg->nivel); //Esta Mal aca
 
     if(cadenaComparar(reg->nivel, "Nivel General") == 0){
         cadenaCopiar(reg->clasif, "Clasificador");
@@ -119,11 +122,7 @@ int corregirFecha(char* buf)
 
 int corregirIndice(char* buf)
 {
-    char* tmp = cadenaCaracter(buf, ',');
-
-    if(tmp){
-        *tmp = '.';
-    }
+    cadenaReemplazarCaract(buf, ',', '.');
 
     return EXITO;
 }
@@ -150,6 +149,8 @@ int desencriptarNivelGeneral(char* buf)
         i++;
     }
 
+    puts(buf);
+
     return EXITO;
 }
 
@@ -162,9 +163,7 @@ int normalizarNivel(char* buf)
     secuenciaPalabraCrear(&secOri, buf);
     secuenciaPalabraCrear(&secNorm, salida);
     secuenciaPalabraLeer(&secOri, &pal);
-
     palabraModificar(&pal, cadenaCapitalizar);
-
     secuenciaPalabraEscribir(&secNorm, &pal);
     secuenciaPalabraEscribirCaract(&secNorm, ' ');
 
@@ -176,7 +175,6 @@ int normalizarNivel(char* buf)
     }
 
     secuenciaPalabraCerrar(&secNorm);
-    puts(salida);
     cadenaCopiar(buf, salida);
 
     return EXITO;

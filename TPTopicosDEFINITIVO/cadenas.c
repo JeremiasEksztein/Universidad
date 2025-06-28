@@ -164,6 +164,21 @@ char* cadenaCaracterReverso(const char* str, int ch)
     return i;
 }
 
+char* cadenaReemplazarCaract(char* str, int ori, int nuevo)
+{
+    char* i = str;
+
+    while(*i){
+        if(*i == ori){
+            *i = nuevo;
+        }
+
+        i++;
+    }
+
+    return str;
+}
+
 int memoryIntercambiar(void* a, void* b, size_t tamElem)
 {
     void* tmp = malloc(tamElem);

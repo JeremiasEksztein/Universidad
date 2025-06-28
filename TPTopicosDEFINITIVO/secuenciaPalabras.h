@@ -4,16 +4,17 @@
 #include "cadenas.h"
 #include "comunesYErrores.h"
 
+#define DEFAULT_PAL_TAM 50
+
 typedef char* (*ModificarPal)(char*);
 
 typedef struct{
-    char* cadena;
     char* cursor;
     int esFin;
 }SecuenciaPalabra;
 
 typedef struct{
-    char* palabra;
+    char palabra[DEFAULT_PAL_TAM];
 }Palabra;
 
 /*SecuenciaPalabra*/

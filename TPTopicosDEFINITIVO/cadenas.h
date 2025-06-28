@@ -22,6 +22,7 @@ int cadenaComparar(const char* lhs, const char* rhs);
 size_t cadenaLongitud(const char* str);
 char* cadenaCaracter(const char* str, int ch);
 char* cadenaCaracterReverso(const char* str, int ch);
+char* cadenaReemplazarCaract(char* str, int ori, int nuevo);
 
 int memoryIntercambiar(void* a, void* b, size_t tamElem);
 

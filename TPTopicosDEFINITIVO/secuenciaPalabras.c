@@ -2,7 +2,6 @@
 
 int secuenciaPalabraCrear(SecuenciaPalabra* sec, char* str)
 {
-    sec->cadena = str;
     sec->cursor = str;
     sec->esFin = 0;
 
@@ -28,11 +27,11 @@ int secuenciaPalabraLeer(SecuenciaPalabra* sec, Palabra* pal)
 
     char* tmpPal = pal->palabra;
 
-    while(*(sec->cursor) && esLetra(*(sec->cursor))){
+    do{
         *tmpPal = *(sec->cursor);
         tmpPal++;
         sec->cursor++;
-    }
+    }while(*(sec->cursor) && esLetra(*(sec->cursor)));
 
     *tmpPal = '\0';
 
@@ -41,9 +40,11 @@ int secuenciaPalabraLeer(SecuenciaPalabra* sec, Palabra* pal)
 
 int secuenciaPalabraEscribir(SecuenciaPalabra* sec, Palabra* pal)
 {
-    while(*(pal->palabra)){
-        *(sec->cursor) = *(pal->palabra);
-        pal->palabra++;
+    char* i = pal->palabra;
+
+    while(*i){
+        *(sec->cursor) = *i;
+        i++;
         sec->cursor++;
     }
 

@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1751150969 source:c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\funciones.c
+1751153295 source:c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\funciones.c
 	"funciones.h"
 
 1751136686 c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\funciones.h
@@ -10,11 +10,11 @@
 	"vectorIterador.h"
 	"comunesYErrores.h"
 
-1751119123 c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\secuenciapalabras.h
+1751153410 c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\secuenciapalabras.h
 	"cadenas.h"
 	"comunesYErrores.h"
 
-1751141585 c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\cadenas.h
+1751152054 c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\cadenas.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -30,7 +30,7 @@
 	"comunesYErrores.h"
 	"cadenas.h"
 
-1751151025 source:c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\main.c
+1751151752 source:c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\main.c
 	<stdio.h>
 	<stdlib.h>
 	"funciones.h"
@@ -40,7 +40,7 @@
 	"vector.h"
 	"funciones.h"
 
-1751149700 source:c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\cadenas.c
+1751152053 source:c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\cadenas.c
 	"cadenas.h"
 
 1751123594 source:c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\vectoriterador.c
@@ -49,7 +49,7 @@
 1751123152 c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\vectoriterador.h
 	"vector.h"
 
-1751118493 source:c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\secuenciapalabras.c
+1751153435 source:c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\secuenciapalabras.c
 	"secuenciaPalabras.h"
 
 1751140162 source:c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\pruebasunitarias.c
