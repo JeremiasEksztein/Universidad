@@ -11,6 +11,7 @@
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
+				<Option parameters="C:\\Users\\LENOVO\\OneDrive\\Documentos\\GitHub\\Universidad\\TPTopicosDEFINITIVO\\indices_icc_general_capitulos.csv C:\\Users\\LENOVO\\OneDrive\\Documentos\\GitHub\\Universidad\\TPTopicosDEFINITIVO\\Indice_items_obra.csv ..\\indices_unif.bin" />
 				<Compiler>
 					<Add option="-g" />
 				</Compiler>
@@ -43,11 +44,20 @@
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="pruebasUnitarias.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="secuenciaPalabras.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="secuenciaPalabras.h" />
 		<Unit filename="vector.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="vector.h" />
+		<Unit filename="vectorIterador.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="vectorIterador.h" />
 		<Extensions>
 			<lib_finder disable_auto="1" />

@@ -88,6 +88,24 @@ char* cadenaAMinuscula(char* s)
     return s;
 }
 
+char* cadenaRemoverCaract(char* str, int ch)
+{
+    char* letraActual = str;
+    size_t longSeg;
+
+    while (*letraActual != '\0') {
+
+        if (*letraActual == ch) {
+            longSeg = cadenaLongitud(letraActual +1);
+            memmove(letraActual, letraActual +1, longSeg +1); /* con longSeg +1 también toma el byte del /0 */
+        }
+
+        letraActual++;
+    }
+
+    return str;
+}
+
 int cadenaComparar(const char* lhs, const char* rhs)
 {
     char* l = (char*)lhs;
@@ -123,11 +141,15 @@ char* cadenaCaracter(const char* str, int ch)
 {
     char* i = (char*)str;
 
-    while(*i && *i != ch){
+    while(*i){
+        if(*i == ch){
+            return i;
+        }
+
         i++;
     }
 
-    return i;
+    return NULL;
 }
 
 char* cadenaCaracterReverso(const char* str, int ch)

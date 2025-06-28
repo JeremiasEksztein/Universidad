@@ -1,8 +1,8 @@
 # depslib dependency file v1.0
-1751115861 source:c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\funciones.c
+1751150969 source:c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\funciones.c
 	"funciones.h"
 
-1751123744 c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\funciones.h
+1751136686 c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\funciones.h
 	<stdlib.h>
 	<stdio.h>
 	"secuenciaPalabras.h"
@@ -14,32 +14,33 @@
 	"cadenas.h"
 	"comunesYErrores.h"
 
-1751119541 c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\cadenas.h
+1751141585 c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\cadenas.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	<ctype.h>
 	"comunesYErrores.h"
 
-1751113650 c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\comunesyerrores.h
+1751136686 c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\comunesyerrores.h
 
-1751078608 c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\vector.h
+1751149364 c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\vector.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"comunesYErrores.h"
 	"cadenas.h"
 
-1751123153 source:c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\main.c
+1751151025 source:c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\main.c
 	<stdio.h>
 	<stdlib.h>
 	"funciones.h"
 	"comunesYErrores.h"
 
-1751080623 source:c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\vector.c
+1751149372 source:c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\vector.c
 	"vector.h"
+	"funciones.h"
 
-1751119533 source:c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\cadenas.c
+1751149700 source:c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\cadenas.c
 	"cadenas.h"
 
 1751123594 source:c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\vectoriterador.c
@@ -50,4 +51,15 @@
 
 1751118493 source:c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\secuenciapalabras.c
 	"secuenciaPalabras.h"
+
+1751140162 source:c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\pruebasunitarias.c
+	<stdio.h>
+	<stdlib.h>
+	<assert.h>
+	"funciones.h"
+	"cadenas.h"
+	"secuenciaPalabras.h"
+	"comunesYErrores.h"
+	"vector.h"
+	"vectorIterador.h"
 

@@ -8,8 +8,6 @@
 #include "vectorIterador.h"
 #include "comunesYErrores.h"
 
-#define BUFFER_TAM 256
-
 #define PERIODO_TAM 12
 #define NIVEL_TAM 41
 #define INDICE_TAM 17

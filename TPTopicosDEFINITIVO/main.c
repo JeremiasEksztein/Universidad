@@ -3,6 +3,8 @@
 #include "funciones.h"
 #include "comunesYErrores.h"
 
+void imprimirRegistro(const void* reg);
+
 int main(int argc, char* argv[])
 {
     if(argc != 4){
@@ -11,13 +13,21 @@ int main(int argc, char* argv[])
 
     Vector vecIndGen, vecIndItems;
 
-    TRY(vectorCrear(&vecIndGen, sizeof(Registro)));
+    puts(argv[NOM_ARCH_INDICES_ITEMS]);
 
-    TRY(vectorCrear(&vecIndGen, sizeof(Registro)));
+    TRY(vectorCrear(&vecIndGen, sizeof(Registro))); //FUNCIONA
 
-    TRY(vectorCargarTexto(&vecIndGen, argv[NOM_ARCH_INDICES_GENERAL], cargarRegistroIndGeneral));
+    TRY(vectorCrear(&vecIndItems, sizeof(Registro))); //FUNCIONA
 
-    TRY(vectorCargarTexto(&vecIndItems, argv[NOM_ARCH_INDICES_ITEMS], cargarRegistroIndItems));
+    TRY(vectorGuardarTexto(&vecIndGen, argv[NOM_ARCH_INDICES_GENERAL], cargarRegistroIndGeneral));
+
+    vectorMostrar(&vecIndGen, imprimirRegistro);
+
+    TRY(vectorGuardarTexto(&vecIndItems, argv[NOM_ARCH_INDICES_ITEMS], cargarRegistroIndGeneral));
+
+    vectorMostrar(&vecIndItems, imprimirRegistro);
+
+    //Hasta aca funciona todo bien
 
     TRY(corregirRegistros(&vecIndGen, corregirRegistroGeneral));
 
@@ -27,7 +37,7 @@ int main(int argc, char* argv[])
 
     vectorDestruir(&vecIndItems);
 
-    vectorOrdenar(&vecIndGen, compararFechas, INSERCION);
+    vectorOrdenar(&vecIndGen, compararFechas, BURBUJEO);
 
     TRY(calcularVariaciones(&vecIndGen, "var_mensual", 1));
 
@@ -38,4 +48,12 @@ int main(int argc, char* argv[])
     vectorDestruir(&vecIndGen);
 
     return 0;
+}
+
+void imprimirRegistro(const void* reg)
+{
+    Registro* i = (Registro*)reg;
+
+    // Asegúrate de que los campos sean cadenas y estén correctamente inicializados
+    printf("%s;%s;%s\n", i->periodo, i->nivel, i->indice);
 }

@@ -2,62 +2,72 @@
 
 int cargarRegistroIndGeneral(FILE* arch, void* buf)
 {
-    Registro reg;
-    char* tmpBuf = buf;
-    char* cur = buf;
+    Registro* reg = buf;
+    char buffer[256];
+    char* cur = buffer;
 
-    if(!(cur = cadenaCaracterReverso(tmpBuf, '\n'))){
+    if (!fgets(buffer, sizeof(buffer), arch)) {
+        return ERR_REGISTRO;
+    }
+    cadenaRemoverCaract(buffer, '\"');
+
+    if(!(cur = cadenaCaracterReverso(buffer, '\n'))){
         return ERR_REGISTRO;
     }
 
     *cur = '\0';
 
-    if(!(cur = cadenaCaracterReverso(tmpBuf, ';'))){
+    if(!(cur = cadenaCaracterReverso(buffer, ';'))){
         return ERR_REGISTRO;
     }
 
-    sscanf(cur, "%s", reg.indice);
+    sscanf(cur + 1, "%s", reg->indice);
     *cur = '\0';
 
-    if(!(cur = cadenaCaracterReverso(tmpBuf, ';'))){
+    if(!(cur = cadenaCaracterReverso(buffer, ';'))){
         return ERR_REGISTRO;
     }
 
-    sscanf(cur, "%s", reg.nivel);
+    sscanf(cur + 1, "%s", reg->nivel);
     *cur = '\0';
 
-    sscanf(tmpBuf, "%s", reg.periodo);
+    sscanf(buffer, "%s", reg->periodo);
 
     return EXITO;
 }
 
 int cargarRegistroIndItems(FILE* arch, void* buf)
 {
-    Registro reg;
-    char* tmpBuf = buf;
-    char* cur = buf;
+    Registro* reg = buf;
+    char buffer[256];
+    char* cur = buffer;
 
-    if(!(cur = cadenaCaracterReverso(tmpBuf, '\n'))){
+    if(fgets(buffer, sizeof(buffer), arch)){
+        return ERR_REGISTRO;
+    }
+    cadenaRemoverCaract(buffer, '\"');
+
+    if(!(cur = cadenaCaracterReverso(buffer, '\n'))){
         return ERR_REGISTRO;
     }
 
     *cur = '\0';
 
-    if(!(cur = cadenaCaracterReverso(tmpBuf, ';'))){
+    if(!(cur = cadenaCaracterReverso(buffer, ';'))){
         return ERR_REGISTRO;
     }
 
-    sscanf(cur, "%s", reg.indice);
+    sscanf(cur + 1, "%s", reg->indice);
     *cur = '\0';
 
-    if(!(cur = cadenaCaracterReverso(tmpBuf, ';'))){
+    if(!(cur = cadenaCaracterReverso(buffer, ';'))){
         return ERR_REGISTRO;
     }
 
-    sscanf(cur, "%s", reg.nivel);
+    sscanf(cur + 1, "%s", reg->nivel);
     *cur = '\0';
 
-    sscanf(tmpBuf, "%s", reg.periodo);
+    sscanf(buffer, "%s", reg->periodo);
 
     return EXITO;
 }
@@ -67,9 +77,11 @@ int corregirRegistros(Vector* vec, Corrector crtFunc)
     VectorIterador iter;
     void* elem = NULL;
 
+    vectorEliminarPrimero(vec);
+
     vectorIteradorCrear(&iter, vec);
 
-    while(vectorIteradorFin(&iter)){
+    while(!vectorIteradorFin(&iter)){
         elem = vectorIteradorSiguiente(&iter);
         crtFunc(elem);
     }
@@ -99,7 +111,7 @@ int corregirFecha(char* buf)
 {
     int d, m, a;
 
-    sscanf(buf, "\"%d/%d/%d\"", &d, &m, &a);
+    sscanf(buf, "%d/%d/%d", &d, &m, &a);
     sprintf(buf, "%4d-%02d-%02d", a, m, d);
 
     return EXITO;
@@ -109,7 +121,9 @@ int corregirIndice(char* buf)
 {
     char* tmp = cadenaCaracter(buf, ',');
 
-    *tmp = '.';
+    if(tmp){
+        *tmp = '.';
+    }
 
     return EXITO;
 }
@@ -127,8 +141,8 @@ int desencriptarNivelGeneral(char* buf)
                 *i += 2;
             }
 
-            if(*i >= 'z'){
-                *i = 'a' + (*i + 'z' - 1);
+            if(*i > 'z'){
+                *i -= ('z' - 'a' + 1);
             }
         }
 
@@ -143,25 +157,26 @@ int normalizarNivel(char* buf)
 {
     SecuenciaPalabra secOri, secNorm;
     Palabra pal;
-    char* salida = NULL;
+    char salida[NIVEL_TAM];
 
     secuenciaPalabraCrear(&secOri, buf);
-    secuenciaPalabraCrear(&secNorm, buf);
-
+    secuenciaPalabraCrear(&secNorm, salida);
     secuenciaPalabraLeer(&secOri, &pal);
+
     palabraModificar(&pal, cadenaCapitalizar);
+
     secuenciaPalabraEscribir(&secNorm, &pal);
     secuenciaPalabraEscribirCaract(&secNorm, ' ');
 
     while(!secuenciaPalabraEsFin(&secOri)){
-
+        secuenciaPalabraEscribirCaract(&secNorm, ' ');
         secuenciaPalabraLeer(&secOri, &pal);
         palabraModificar(&pal, cadenaAMinuscula);
         secuenciaPalabraEscribir(&secNorm, &pal);
-        secuenciaPalabraEscribirCaract(&secNorm, ' ');
     }
 
     secuenciaPalabraCerrar(&secNorm);
+    puts(salida);
     cadenaCopiar(buf, salida);
 
     return EXITO;

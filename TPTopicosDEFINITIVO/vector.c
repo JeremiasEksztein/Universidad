@@ -1,4 +1,5 @@
 #include "vector.h"
+#include "funciones.h"
 
 void bubbleSort(Vector* vec, Comparar cmpFunc);
 void selectionSort(Vector* vec, Comparar cmpFunc);
@@ -98,11 +99,17 @@ int vectorGuardarTexto(Vector* vec, const char* path, FileReadText fReadFunc)
 
     char* tmpBuf = malloc(vec->tamElem);
 
-    if(!tmpBuf) return ERR_MEMORIA;
+    if(!tmpBuf){
+        fclose(arch);
+        return ERR_MEMORIA;
+    }
 
-    while(!feof(arch)){
-        fReadFunc(arch, tmpBuf);
-        vectorAgregar(vec, tmpBuf);
+    while((fReadFunc(arch, tmpBuf)) == EXITO && !feof(arch)){
+        if(vectorAgregar(vec, tmpBuf)){
+            fclose(arch);
+            free(tmpBuf);
+            return ERR_MEMORIA;
+        }
     }
 
     fclose(arch);
@@ -179,9 +186,7 @@ int vectorAgregar(Vector* vec, void* elem)
         if(vectorRedimensionar(vec, vec->cap * FACTOR_INCR)) return ERR_MEMORIA;
     }
 
-    char* tmpData = vec->data;
-
-    tmpData += vec->cantElem * vec->tamElem;
+    char* tmpData = (char*)vec->data + vec->cantElem * vec->tamElem;
 
     memcpy(tmpData, elem, vec->tamElem);
 
@@ -208,6 +213,17 @@ int vectorEliminarUlt(Vector* vec)
     if(vec->cantElem == 0) return ERR_MAL_INGRESO;
 
     vec->cantElem--;
+
+    return EXITO;
+}
+
+int vectorEliminarPrimero(Vector* vec)
+{
+    if(vec->cantElem == 0) return ERR_MAL_INGRESO;
+
+    char* tmpSig = vec->data + vec->tamElem;
+
+    memcpy(vec->data, tmpSig, (vec->cantElem - 1) * vec->tamElem);
 
     return EXITO;
 }
@@ -291,7 +307,7 @@ int vectorMostrar(Vector* vec, Imprimir imprFunc)
     char* i = vec->data;
     char* ult = vec->data + (vec->cantElem) * vec->tamElem;
 
-    for(; i < ult; i++){
+    for(; i < ult; i += vec->tamElem){
         imprFunc(i);
     }
 

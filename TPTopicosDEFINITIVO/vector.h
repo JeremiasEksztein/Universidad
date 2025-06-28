@@ -44,6 +44,7 @@ void* vectorObtener(Vector* vec, size_t pos);
 int vectorAgregar(Vector* vec, void* elem);
 int vectorModificar(Vector* vec, void* newElem, size_t pos);
 int vectorEliminarUlt(Vector* vec);
+int vectorEliminarPrimero(Vector* vec);
 int vectorConcatenar(Vector* vecA, Vector* vecB);
 int vectorVaciar(Vector* vec);
 
