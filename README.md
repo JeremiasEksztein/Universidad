@@ -8,4 +8,4 @@
 - Completar los ejercicios de recursividad
 - Implementar algunos merge para practicar.
 - Hacer el TP por mi cuenta. !!
-- Hacer la defensa !!
+- Hacer la defensa tanto en el TP de ellos, como en el mio!!
