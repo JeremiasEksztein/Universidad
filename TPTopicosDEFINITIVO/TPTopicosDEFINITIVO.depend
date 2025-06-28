@@ -2,7 +2,7 @@
 1751115861 source:c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\funciones.c
 	"funciones.h"
 
-1751115827 c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\funciones.h
+1751123744 c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\funciones.h
 	<stdlib.h>
 	<stdio.h>
 	"secuenciaPalabras.h"
@@ -14,7 +14,7 @@
 	"cadenas.h"
 	"comunesYErrores.h"
 
-1751119188 c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\cadenas.h
+1751119541 c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\cadenas.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -30,7 +30,7 @@
 	"comunesYErrores.h"
 	"cadenas.h"
 
-1751118330 source:c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\main.c
+1751123153 source:c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\main.c
 	<stdio.h>
 	<stdlib.h>
 	"funciones.h"
@@ -39,13 +39,13 @@
 1751080623 source:c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\vector.c
 	"vector.h"
 
-1751118411 source:c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\cadenas.c
+1751119533 source:c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\cadenas.c
 	"cadenas.h"
 
-1751113790 source:c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\vectoriterador.c
+1751123594 source:c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\vectoriterador.c
 	"vectorIterador.h"
 
-1751113650 c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\vectoriterador.h
+1751123152 c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\vectoriterador.h
 	"vector.h"
 
 1751118493 source:c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\secuenciapalabras.c

@@ -76,7 +76,7 @@ char* cadenaCapitalizar(char* str)
     return str;
 }
 
-char* cadenaAMinusucula(char* s)
+char* cadenaAMinuscula(char* s)
 {
     char* i = s;
 

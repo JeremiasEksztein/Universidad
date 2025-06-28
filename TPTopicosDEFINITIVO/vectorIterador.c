@@ -12,6 +12,63 @@ int vectorIteradorCrear(VectorIterador* iter, Vector* vec)
     return EXITO;
 }
 
+void* vectorIteradorPrimero(VectorIterador* iter)
+{
+    if(iter->vec->cantElem == 0){
+        return NULL;
+    }
+
+    return iter->vec->data;
+}
+
+void* vectorIteradorSiguiente(VectorIterador* iter)
+{
+    char* tmpCur = iter->cursor;
+    iter->cursor += iter->vec->tamElem;
+
+    if(iter->cursor == iter->fin){
+        iter->esFin = 1;
+    }
+
+    return tmpCur;
+}
+
+void* vectorIteradorMover(VectorIterador* iter, int offset)
+{
+    int pos = (iter->cursor - iter->vec->data) * iter->vec->tamElem;
+
+    if((pos - offset) < 0 || (pos + offset) > iter->vec->cantElem){
+        return NULL;
+    }
+
+    iter->cursor += offset * iter->vec->tamElem;
+
+    if(iter->cursor == iter->fin){
+        iter->esFin = 1;
+    }
+
+    return iter->cursor;
+}
+
+int vectorIteradorFin(VectorIterador* iter)
+{
+    return iter->esFin;
+}
+
+
+/*
+int vectorIteradorCrear(VectorIterador* iter, Vector* vec)
+{
+    if(vec->cantElem == 0) return ERR_MAL_INGRESO;
+
+    iter->cursor = vec->data;
+    iter->vec = vec;
+    iter->fin = vec->data + vec->cantElem * vec->tamElem;
+    iter->esFin = 0;
+
+    return EXITO;
+}
+
 void vectorIteradorDestruir(VectorIterador* iter)
 {
     iter->cursor = NULL;
@@ -82,3 +139,4 @@ int vectorIteradorFin(VectorIterador* iter)
     return iter->esFin;
 }
 
+*/

@@ -67,12 +67,11 @@ int corregirRegistros(Vector* vec, Corrector crtFunc)
     VectorIterador iter;
     void* elem = NULL;
 
-    TRY(vectorIteradorCrear(&iter, vec));
+    vectorIteradorCrear(&iter, vec);
 
     while(vectorIteradorFin(&iter)){
-        elem = vectorIteradorLeer(&iter);
-        vectorIteradorMover(&iter, -1);
-        vectorIteradorEscribir(&iter, elem);
+        elem = vectorIteradorSiguiente(&iter);
+        crtFunc(elem);
     }
 
     return EXITO;
@@ -159,11 +158,109 @@ int normalizarNivel(char* buf)
         secuenciaPalabraLeer(&secOri, &pal);
         palabraModificar(&pal, cadenaAMinuscula);
         secuenciaPalabraEscribir(&secNorm, &pal);
-        secuenciaPalabraEscribir(&secNorm, ' ');
+        secuenciaPalabraEscribirCaract(&secNorm, ' ');
     }
 
     secuenciaPalabraCerrar(&secNorm);
     cadenaCopiar(buf, salida);
 
     return EXITO;
+}
+
+int corregirRegistroItems(void* buf)
+{
+    Registro* reg = (Registro*) buf;
+
+    corregirFecha(reg->periodo);
+    corregirIndice(reg->indice);
+    desencriptarNivelItems(reg->nivel);
+    normalizarNivel(reg->nivel);
+
+    cadenaCopiar(reg->clasif, "Items");
+
+    return EXITO;
+}
+
+int desencriptarNivelItems(char* buf)
+{
+    char* i = buf;
+    char* pos = NULL;
+
+    char clave[] = "@8310$7|59";
+    char valor[] = "abeiostlmn";
+
+    while(*i){
+        if((pos = cadenaCaracter(clave, *i))){
+            *i = *(valor + (pos - clave));
+        }
+
+        i++;
+    }
+
+    return EXITO;
+}
+
+int compararFechas(const void* a, const void* b)
+{
+    Registro* regA = (Registro*) a;
+    Registro* regB = (Registro*) b;
+
+    int d, m, anio, suma = 0;
+
+    sscanf(regA->periodo, "%d-%d-%d", &anio, &m, &d);
+
+    suma += anio * 10000 + m * 1000 + d * 10;
+
+    sscanf(regB->periodo, "%d-%d-%d", &anio, &m, &d);
+
+    suma -= anio * 10000 + m * 1000 + d * 10;
+
+    return suma;
+}
+
+int calcularVariaciones(Vector* vec, char* nomVar, int rango)
+{
+    VectorIterador iter;
+    vectorIteradorCrear(&iter, vec);
+    Registro* reg = (Registro*)vectorIteradorPrimero(&iter);
+    Registro* regAnterior = NULL;
+
+    size_t cantRegistros = cantidadDeMeses(vec) * rango;
+    int i;
+    double variacion;
+
+    for(i = 0; i < cantRegistros; i++){
+        sprintf(reg->var_indice, "%s", nomVar);
+        sprintf(reg->indice, "%s", "NA");
+        reg = (Registro*) vectorIteradorSiguiente(&iter);
+    }
+
+    while(!vectorIteradorFin(&iter)){
+        regAnterior = (Registro*) vectorIteradorMover(&iter, -cantRegistros);
+        vectorIteradorMover(&iter, cantRegistros);
+
+        variacion = (((atof(reg->indice)) / (atof(regAnterior->indice) - 1)) - 1) * 100;
+        sprintf(reg->indice, "%.02f\n", variacion);
+
+        reg = (Registro*) vectorIteradorSiguiente(&iter);
+    }
+
+    return EXITO;
+}
+
+int cantidadDeMeses(Vector* vec)
+{
+    VectorIterador iter;
+    vectorIteradorCrear(&iter, vec);
+
+    size_t count = 0;
+    Registro* reg = vectorIteradorPrimero(&iter);
+    Registro* regActual = vectorIteradorSiguiente(&iter);
+
+    while(cadenaComparar(reg->nivel, regActual->nivel) != 0){
+        count++;
+        regActual = (Registro*) vectorIteradorSiguiente(&iter);
+    }
+
+    return count;
 }

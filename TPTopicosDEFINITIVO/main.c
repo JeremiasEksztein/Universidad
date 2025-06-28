@@ -5,6 +5,10 @@
 
 int main(int argc, char* argv[])
 {
+    if(argc != 4){
+        return ERR_MAL_INGRESO;
+    }
+
     Vector vecIndGen, vecIndItems;
 
     TRY(vectorCrear(&vecIndGen, sizeof(Registro)));

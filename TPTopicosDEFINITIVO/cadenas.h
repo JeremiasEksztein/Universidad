@@ -14,7 +14,7 @@ char* cadenaConcatenar(char* dest, const char* src);
 char* cadenaDuplicar(const char* str);
 char* cadenaInvertir(char* str);
 char* cadenaCapitalizar(char* str);
-char* cadenaAMinusucula(char* str);
+char* cadenaAMinuscula(char* str);
 
 int cadenaComparar(const char* lhs, const char* rhs);
 //int cadenaCompararI(const char* lhs, const char* rhs);
