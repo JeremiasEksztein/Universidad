@@ -5,15 +5,16 @@
 #include <stdio.h>
 #include "secuenciaPalabras.h"
 #include "vector.h"
+#include "vectorIterador.h"
 #include "comunesYErrores.h"
 
 #define BUFFER_TAM 256
 
-#define PERIODO_TAM 25
-#define NIVEL_TAM 25
-#define INDICE_TAM 25
-#define CLASIF_TAM 25
-#define VAR_INDICE_TAM 25
+#define PERIODO_TAM 12
+#define NIVEL_TAM 41
+#define INDICE_TAM 17
+#define CLASIF_TAM 14
+#define VAR_INDICE_TAM 13
 
 typedef int (*Corrector)(void*);
 

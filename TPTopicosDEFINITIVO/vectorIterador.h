@@ -5,7 +5,7 @@
 
 typedef struct{
     void* cursor;
-    void* ini;
+    Vector* vec;
     void* fin;
     int esFin;
 }VectorIterador;
@@ -15,10 +15,10 @@ void vectorIteradorDestruir(VectorIterador* iter);
 
 int vectorIteradorMover(VectorIterador* iter, size_t nuevaPos);
 void* vectorIteradorLeer(VectorIterador* iter);
-int VectorIteradorEscribir(VectorIterador* iter, void* elem);
-int VectorIteradorReiniciar(VectorIterador* iter);
+int vectorIteradorEscribir(VectorIterador* iter, void* elem);
+int vectorIteradorReiniciar(VectorIterador* iter);
 
 size_t vectorIteradorPosCursor(VectorIterador* iter);
-int VectorIteradorFin(VectorIterador* iter);
+int vectorIteradorFin(VectorIterador* iter);
 
 #endif // VECTORITERADOR_H_INCLUDED

@@ -3,7 +3,7 @@
 #include "funciones.h"
 #include "comunesYErrores.h"
 
-int main(int argv, char* argc[])
+int main(int argc, char* argv[])
 {
     Vector vecIndGen, vecIndItems;
 
@@ -11,9 +11,9 @@ int main(int argv, char* argc[])
 
     TRY(vectorCrear(&vecIndGen, sizeof(Registro)));
 
-    TRY(vectorCargarTexto(&vecIndGen, argc[NOM_ARCH_INDICES_GENERAL], cargarRegistroIndGeneral));
+    TRY(vectorCargarTexto(&vecIndGen, argv[NOM_ARCH_INDICES_GENERAL], cargarRegistroIndGeneral));
 
-    TRY(vectorCargarTexto(&vecIndItems, argc[NOM_ARCH_INDICES_ITEMS], cargarRegistroIndItems));
+    TRY(vectorCargarTexto(&vecIndItems, argv[NOM_ARCH_INDICES_ITEMS], cargarRegistroIndItems));
 
     TRY(corregirRegistros(&vecIndGen, corregirRegistroGeneral));
 
@@ -29,7 +29,7 @@ int main(int argv, char* argc[])
 
     TRY(calcularVariaciones(&vecIndGen, "var_anual", 12));
 
-    TRY(vectorCargarBinario(&vecIndGen, argc[NOM_ARCH_INDICES_UNIF]));
+    TRY(vectorCargarBinario(&vecIndGen, argv[NOM_ARCH_INDICES_UNIF]));
 
     vectorDestruir(&vecIndGen);
 

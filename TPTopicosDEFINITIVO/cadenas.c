@@ -1,5 +1,10 @@
 #include "cadenas.h"
 
+int esLetra(int ch)
+{
+    return ((ch >= 'a' && ch <= 'z') && (ch >= 'A' || ch <= 'Z'));
+}
+
 char* cadenaCopiar(char* dest, const char* src)
 {
     char* d = dest;
@@ -69,6 +74,18 @@ char* cadenaCapitalizar(char* str)
     }
 
     return str;
+}
+
+char* cadenaAMinusucula(char* s)
+{
+    char* i = s;
+
+    while(*i){
+        *i = tolower(*i);
+        i++;
+    }
+
+    return s;
 }
 
 int cadenaComparar(const char* lhs, const char* rhs)

@@ -5,7 +5,7 @@
 #define ERROR_CHECK(error) \
         if((error)){ \
             printf("Error: %d\n", (error));\
-            return(error); \
+            return (error); \
         }
 
 #define TRY(expr)           \

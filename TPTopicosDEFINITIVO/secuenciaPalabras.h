@@ -2,8 +2,9 @@
 #define SECUENCIAPALABRAS_H_INCLUDED
 
 #include "cadenas.h"
+#include "comunesYErrores.h"
 
-typedef void (*ModificarPal)(char*);
+typedef char* (*ModificarPal)(char*);
 
 typedef struct{
     char* cadena;
