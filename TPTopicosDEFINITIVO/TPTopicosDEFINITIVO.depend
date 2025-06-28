@@ -2,7 +2,7 @@
 1751064951 source:c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\funciones.c
 	"funciones.h"
 
-1751068341 c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\funciones.h
+1751079185 c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\funciones.h
 	<stdlib.h>
 	<stdio.h>
 	"secuenciaPalabras.h"
@@ -12,15 +12,31 @@
 1751064968 c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\secuenciapalabras.h
 	"cadenas.h"
 
-1751064951 c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\cadenas.h
+1751079954 c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\cadenas.h
 	<stdio.h>
 	<stdlib.h>
+	<string.h>
+	<ctype.h>
 	"comunesYErrores.h"
 
-1751068466 c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\comunesyerrores.h
+1751078472 c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\comunesyerrores.h
 
-1751065493 c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\vector.h
+1751078608 c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\vector.h
 	<stdio.h>
 	<stdlib.h>
+	<string.h>
 	"comunesYErrores.h"
+	"cadenas.h"
+
+1751078847 source:c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\main.c
+	<stdio.h>
+	<stdlib.h>
+	"funciones.h"
+	"comunesYErrores.h"
+
+1751078888 source:c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\vector.c
+	"vector.h"
+
+1751080000 source:c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\cadenas.c
+	"cadenas.h"
 

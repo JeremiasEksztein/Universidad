@@ -10,7 +10,7 @@
 
 #define TRY(expr)           \
     do{                     \
-        ERROR_CHECK(((expr))  \
+        ERROR_CHECK((expr))  \
     }while(0);
 
 #define NOM_ARCH_INDICES_GENERAL 1

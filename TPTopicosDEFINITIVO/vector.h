@@ -3,7 +3,9 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "comunesYErrores.h"
+#include "cadenas.h"
 
 #define CHECK_RANGO(x, min, max) ((x < min || x > max) ? 1 : 0)
 

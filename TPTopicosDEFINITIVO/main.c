@@ -15,23 +15,23 @@ int main(int argv, char* argc[])
 
     TRY(vectorCargarTexto(&vecIndItems, argc[NOM_ARCH_INDICES_ITEMS], cargarRegistroIndItems));
 
-    TRY(corregirRegistros(vecIndGen, corregirRegistroGeneral));
+    TRY(corregirRegistros(&vecIndGen, corregirRegistroGeneral));
 
-    TRY(corregirRegistros(vecIndItems, corregirRegistroItems));
+    TRY(corregirRegistros(&vecIndItems, corregirRegistroItems));
 
-    TRY(vectorConcatenar(vecIndGen, vecIndItems));
+    TRY(vectorConcatenar(&vecIndGen, &vecIndItems));
 
-    vectorDestruir(vecIndItems);
+    vectorDestruir(&vecIndItems);
 
-    vectorOrdenar(vecIndGen, compararFechas, INSERCION);
+    vectorOrdenar(&vecIndGen, compararFechas, INSERCION);
 
-    TRY(calcularVariaciones(vecIndGen, "var_mensual", 1));
+    TRY(calcularVariaciones(&vecIndGen, "var_mensual", 1));
 
-    TRY(calcularVariaciones(vecIndGen, "var_anual", 12));
+    TRY(calcularVariaciones(&vecIndGen, "var_anual", 12));
 
-    TRY(vectorCargarBinario(vecIndGen, argv[NOM_ARCH_INDICES_UNIF]));
+    TRY(vectorCargarBinario(&vecIndGen, argc[NOM_ARCH_INDICES_UNIF]));
 
-    vectorDestruir(vecIndGen);
+    vectorDestruir(&vecIndGen);
 
     return 0;
 }

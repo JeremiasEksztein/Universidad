@@ -4,8 +4,8 @@ void bubbleSort(Vector* vec, Comparar cmpFunc);
 void selectionSort(Vector* vec, Comparar cmpFunc);
 void insertionSort(Vector* vec, Comparar cmpFunc);
 
-size_t busquedaLineal(Vector* vec, void* clave, Comparar cmpFunc);
-size_t busquedaBinaria(Vector* vec, void* clave, Comparar cmpFunc);
+int busquedaLineal(Vector* vec, void* clave, Comparar cmpFunc);
+int busquedaBinaria(Vector* vec, void* clave, Comparar cmpFunc);
 
 void bubbleSort(Vector* vec, Comparar cmpFunc)
 {
@@ -22,6 +22,60 @@ void bubbleSort(Vector* vec, Comparar cmpFunc)
         }
     }
 }
+
+void selectionSort(Vector* vec, Comparar cmpFunc)
+{
+
+
+}
+
+void insertionSort(Vector* vec, Comparar cmpFunc)
+{
+
+
+}
+
+int busquedaLineal(Vector* vec, void* clave, Comparar cmpFunc)
+{
+    char* i = vec->data;
+    char* ult = vec->data + (vec->cantElem) * vec->tamElem;
+    int pos = -1;
+
+    while(i < ult && pos == -1){
+        if(cmpFunc(i, clave) == 0){
+            pos = (i - (char*)vec->data) / vec->tamElem;
+        }
+
+        i++;
+    }
+
+    return pos;
+}
+
+int busquedaBinaria(Vector* vec, void* clave, Comparar cmpFunc)
+{
+    char* ori = vec->data;
+    char* li = vec->data;
+    char* ls = vec->data + (vec->cantElem) * vec->tamElem;
+    char* med = li + ((ls - li) / (2 * vec->tamElem)) + vec->tamElem;
+
+    while(li <= ls && cmpFunc(med, clave) != 0){
+        if(cmpFunc(med, clave) > 0){
+            li = med - vec->tamElem;
+        }else if(cmpFunc(med, clave) < 0){
+            ls = med + vec->tamElem;
+        }
+
+        med = li + ((ls - li) / (2 * vec->tamElem)) + vec->tamElem;
+    }
+
+    if(li > ls){
+        return -1;
+    }
+
+    return (med - ori) / vec->tamElem;
+}
+
 
 int vectorCrear(Vector* vec, size_t tamElem)
 {
@@ -47,7 +101,7 @@ int vectorGuardarTexto(Vector* vec, const char* path, FileReadText fReadFunc)
     if(!tmpBuf) return ERR_MEMORIA;
 
     while(!feof(arch)){
-        fWriteFunc(arch, tmpBuf);
+        fReadFunc(arch, tmpBuf);
         vectorAgregar(vec, tmpBuf);
     }
 
@@ -110,13 +164,13 @@ int vectorCargarBinario(Vector* vec, const char* path)
 
 void* vectorObtener(Vector* vec, size_t pos)
 {
-    if(CHECK_RANGO(pos, 0, vec->cantElem)) return ERR_MAL_INGRESO;
+    if(CHECK_RANGO(pos, 0, vec->cantElem)) return NULL;
 
     char* tmpData = vec->data;
 
     tmpData += pos * vec->tamElem;
 
-    return tmpDat;
+    return tmpData;
 }
 
 int vectorAgregar(Vector* vec, void* elem)
@@ -162,7 +216,7 @@ int vectorConcatenar(Vector* vecA, Vector* vecB)
 {
     if(vecA->tamElem != vecB->tamElem) return ERR_MAL_INGRESO;
 
-    if(vecA->cap <= (vecA->cantElem + vecB->cantElem){
+    if(vecA->cap <= (vecA->cantElem + vecB->cantElem)){
         if(vectorRedimensionar(vecA, (vecA->cap + vecB->cap) * FACTOR_INCR)) return ERR_MEMORIA;
     }
 

@@ -3,6 +3,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
 #include "comunesYErrores.h"
 
 char* cadenaCopiar(char* dest, const char* src);
@@ -11,8 +13,8 @@ char* cadenaDuplicar(const char* str);
 char* cadenaInvertir(char* str);
 char* cadenaCapitalizar(char* str);
 
-char* cadenaComparar(const char* lhs, const char* rhs);
-char* cadenaCompararI(const char* lhs, const char* rhs);
+int cadenaComparar(const char* lhs, const char* rhs);
+//int cadenaCompararI(const char* lhs, const char* rhs);
 size_t cadenaLongitud(const char* str);
 char* cadenaCaracter(const char* str, int ch);
 char* cadenaCaracterReverso(const char* str, int ch);
