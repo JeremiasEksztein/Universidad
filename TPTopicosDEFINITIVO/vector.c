@@ -15,8 +15,8 @@ void bubbleSort(Vector* vec, Comparar cmpFunc)
     char* ult = vec->data + (vec->cantElem - 1) * vec->tamElem;
     char* limJ = ult;
 
-    for(; i < ult; i += vec->tamElem){
-        for(j = vec->data; j < limJ; j += vec->tamElem, limJ -= vec->tamElem){
+    for(; i < ult; i += vec->tamElem, limJ -= vec->tamElem){
+        for(j = vec->data; j < limJ; j += vec->tamElem){
             if(cmpFunc(j, j + vec->tamElem) > 0){
                 memoryIntercambiar(j, j + vec->tamElem, vec->tamElem);
             }
@@ -241,6 +241,8 @@ int vectorConcatenar(Vector* vecA, Vector* vecB)
 
     memcpy(tmpUltA, tmpPriB, vecB->cantElem * vecB->tamElem);
 
+    vecA->cantElem += vecB->cantElem;
+
     return EXITO;
 }
 
@@ -317,7 +319,7 @@ int vectorMostrar(Vector* vec, Imprimir imprFunc)
 int vectorRecorrer(Vector* vec, Accion accFunc)
 {
     char* i = vec->data;
-    char* ult = vec->data + (vec->cantElem) * vec->tamElem;
+    char* ult = vec->data + (vec->cantElem - 1) * vec->tamElem;
 
     for(; i < ult; i += vec->tamElem){
         accFunc(i);

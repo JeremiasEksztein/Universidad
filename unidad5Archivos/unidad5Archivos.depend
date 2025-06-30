@@ -7,14 +7,14 @@
 	<stdlib.h>
 	<stdbool.h>
 
-1751056918 source:c:\users\lenovo\onedrive\documentos\github\universidad\unidad5archivos\main.c
+1751232090 source:c:\users\lenovo\onedrive\documentos\github\universidad\unidad5archivos\main.c
 	<stdio.h>
 	<stdlib.h>
+	<string.h>
 	"archivos.h"
-	"../TDAPalabraSecuencias/secuenciaPalabras.h"
-	"../unidad1CadenasLibreria/cadenas.h"
+	"secuenciaPalabras.h"
 
-1751049516 c:\users\lenovo\onedrive\documentos\github\universidad\tdapalabrasecuencias\secuenciapalabras.h
+1751117888 c:\users\lenovo\onedrive\documentos\github\universidad\tdapalabrasecuencias\secuenciapalabras.h
 	<stdlib.h>
 	<stdio.h>
 	"palabra.h"
@@ -26,4 +26,12 @@
 	<stdlib.h>
 	<stdio.h>
 	<ctype.h>
+
+1751232306 source:c:\users\lenovo\onedrive\documentos\github\universidad\unidad5archivos\secuenciapalabras.c
+	"secuenciaPalabras.h"
+
+1751231813 c:\users\lenovo\onedrive\documentos\github\universidad\unidad5archivos\secuenciapalabras.h
+	<stdio.h>
+	<ctype.h>
+	<string.h>
 

@@ -18,6 +18,8 @@ void* vectorIteradorPrimero(VectorIterador* iter)
         return NULL;
     }
 
+    iter->cursor += iter->vec->tamElem;
+
     return iter->vec->data;
 }
 
@@ -35,9 +37,9 @@ void* vectorIteradorSiguiente(VectorIterador* iter)
 
 void* vectorIteradorMover(VectorIterador* iter, int offset)
 {
-    int pos = (iter->cursor - iter->vec->data) * iter->vec->tamElem;
+    int pos = (iter->cursor - iter->vec->data) / iter->vec->tamElem;
 
-    if((pos - offset) < 0 || (pos + offset) > iter->vec->cantElem){
+    if((pos + offset) < 0 || (pos + offset) > iter->vec->cantElem){
         return NULL;
     }
 

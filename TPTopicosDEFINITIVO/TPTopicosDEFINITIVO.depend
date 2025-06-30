@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1751153295 source:c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\funciones.c
+1751211643 source:c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\funciones.c
 	"funciones.h"
 
 1751136686 c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\funciones.h
@@ -23,27 +23,27 @@
 
 1751136686 c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\comunesyerrores.h
 
-1751149364 c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\vector.h
+1751209887 c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\vector.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"comunesYErrores.h"
 	"cadenas.h"
 
-1751151752 source:c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\main.c
+1751211778 source:c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\main.c
 	<stdio.h>
 	<stdlib.h>
 	"funciones.h"
 	"comunesYErrores.h"
 
-1751149372 source:c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\vector.c
+1751210519 source:c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\vector.c
 	"vector.h"
 	"funciones.h"
 
-1751152053 source:c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\cadenas.c
+1751163808 source:c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\cadenas.c
 	"cadenas.h"
 
-1751123594 source:c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\vectoriterador.c
+1751211337 source:c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\vectoriterador.c
 	"vectorIterador.h"
 
 1751123152 c:\users\lenovo\onedrive\documentos\github\universidad\tptopicosdefinitivo\vectoriterador.h

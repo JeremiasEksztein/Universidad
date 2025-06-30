@@ -22,7 +22,7 @@
 typedef int (*FileReadText)(FILE*, void*);
 typedef int (*FileWriteText)(FILE*, void*);
 typedef void (*Imprimir)(const void*);
-typedef void (*Accion)(void*);
+typedef int (*Accion)(void*);
 typedef int (*Comparar)(const void*, const void*);
 
 typedef struct{

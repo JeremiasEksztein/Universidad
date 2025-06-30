@@ -2,16 +2,16 @@
 #include <stdlib.h>
 #include <string.h>
 #include "archivos.h"
-#include "../TDAPalabraSecuencias/secuenciaPalabras.h"
-#include "../unidad1CadenasLibreria/cadenas.h"
+#include "secuenciaPalabras.h"
 
 //5.2
 int resolverEjercicio(char* str);
 
 int main()
 {
-    char cadena[] = "uno.dos.tres.cuatro.cinco.seis.siete.ocho.nueve.diez";
+    char cadena[] = "uno.dos.tres.cuatro.cinco.uno.uno.ocho.nueve.diez,octubre";
 
+    //5.2
     resolverEjercicio(cadena);
 
     return 0;
@@ -22,39 +22,36 @@ int resolverEjercicio(char* str)
     SecuenciaPalabras sec;
     Palabra pal;
 
-    char* first = NULL;
-    char* maxString = NULL;
-    size_t max = 0;
-    size_t count = 0;
-    size_t firstCount = 0;
+    char primerPal[PALABRA_TAM];
+    size_t contPal = 0;
+    size_t contPrimPal = 0;
+    size_t maxPal = 0;
 
     secuenciaPalabrasCrear(&sec, str);
     secuenciaPalabrasLeer(&sec, &pal);
-    printf("La primer palabra es %s\n", pal.pal);
-    strcpy(first, pal.pal);
-    max = strlen(first);
-    maxString = first;
-    firstCount++;
-    count++;
+    maxPal = strlen(pal.palabra);
+    strcpy(primerPal, pal.palabra);
+    contPrimPal++;
 
     while(!secuenciaPalabrasFin(&sec)){
+        contPal++;
+        palabraMostrar(&pal);
 
-        count++;
+        if(maxPal < strlen(pal.palabra)){
+            maxPal = strlen(pal.palabra);
+        }
 
         secuenciaPalabrasLeer(&sec, &pal);
 
-        if(strcmp(first, pal.pal) == 0){
-            firstCount++;
+        if(strcmp(pal.palabra, primerPal) == 0){
+            contPrimPal++;
         }
 
-        if(max < strlen(pal.pal)){
-            max = strlen(pal.pal);
-            maxString = pal.pal;
-        }
     }
 
-    printf("La primer palabra %s y se repite %d veces\n", first, (int)firstCount);
-    printf("La palabra mas larga es %s y tiene longitud %d\n", maxString, (int)max);
+    printf("La cadena mas larga mide %d\n", (int)maxPal);
+    printf("Hay %d palabras\n", (int)contPal);
+    printf("La palabra primera \"%s\" se repite %d veces\n", primerPal, (int)contPrimPal);
 
-    return 1;
+    return 0;
 }

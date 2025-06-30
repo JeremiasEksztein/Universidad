@@ -6,11 +6,8 @@ void normalizarString(char* ori, char* dest);
 
 int main()
 {
-    char cadenaPrueba[] = "¡Hola! ...esto123 es$una++cadena@de@@#prueba---con%%palabras&y##basura.";
+    char cadenaPrueba[] = "uno.dos.tres.cuatro.cinco.seis.siete.ocho.nueve.diez";
     char dest[50];
-
-    char cadenaPrueba2[] = "const char* cadena = "uno.dos.tres.cuatro.cinco.seis.siete.ocho.nueve.diez.";
-"
 
     printf("%s\n", cadenaPrueba);
 
@@ -28,6 +25,7 @@ void normalizarString(char* ori, char* dest)
 
     char* tmpOri = ori;
     char* tmpDest = dest;
+    size_t contPal = 0;
 
     secuenciaPalabrasCrear(&secOri, tmpOri);
     secuenciaPalabrasCrear(&secDest, tmpDest);
@@ -37,11 +35,14 @@ void normalizarString(char* ori, char* dest)
         palabraATitulo(&pal);
         mostrarPalabra(&pal);
         secuenciaPalabrasEscribir(&secDest, &pal);
+        contPal++;
 
         if(!secuenciaPalabrasLeer(&secOri, &pal)){
             secuenciaPalabrasEscribirChar(&secDest, ' ');
         }
     }
+
+    printf("%ld\n", (long)contPal);
 
     secuenciaPalabrasCerrar(&secDest);
 }

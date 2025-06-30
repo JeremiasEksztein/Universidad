@@ -16,6 +16,8 @@ char* cadenaCopiar(char* dest, const char* src)
         s++;
     }
 
+    *d = '\0';
+
     return dest;
 }
 
@@ -29,6 +31,8 @@ char* cadenaConcatenar(char* dest, const char* src)
         d++;
         s++;
     }
+
+    *d = '\0';
 
     return dest;
 }
@@ -108,6 +112,9 @@ char* cadenaRemoverCaract(char* str, int ch)
 
 int cadenaComparar(const char* lhs, const char* rhs)
 {
+    int dif = memcmp(lhs, rhs, (cadenaLongitud(lhs) > cadenaLongitud(rhs) ? cadenaLongitud(lhs) : cadenaLongitud(rhs)));
+
+    /*
     char* l = (char*)lhs;
     char* r = (char*)rhs;
 
@@ -123,6 +130,9 @@ int cadenaComparar(const char* lhs, const char* rhs)
     }
 
     return (*l - *r);
+    */
+
+    return dif;
 }
 
 size_t cadenaLongitud(const char* str)
