@@ -26,7 +26,30 @@ int bubbleSort(Vector* vec, Comparar cmpFunc)
     return EXITO;
 }
 
-//Probado
+int selectionSort(Vector* vec, Comparar cmpFunc)
+{
+    char* i = vec->data;
+    char* j = i;
+    char* ult = vec->data + (vec->cantElem - 1) * vec->tamElem;
+    char* min = NULL;
+
+    for(; i < ult; i += vec->tamElem){
+        min = i;
+
+        for(j = i + vec->tamElem; j < (ult + vec->tamElem); j += vec->tamElem){
+            if(cmpFunc(j, min) > 0){
+                min = j;
+            }
+        }
+
+        intercambiar(i, min, vec->tamElem);
+    }
+
+    return EXITO;
+}
+
+
+/*
 int selectionSort(Vector* vec, Comparar cmpFunc)
 {
     char* tmpI = vec->data;
@@ -46,7 +69,7 @@ int selectionSort(Vector* vec, Comparar cmpFunc)
     }
 
     return EXITO;
-}
+}*/
 
 //Probado
 int insertionSort(Vector* vec, Comparar cmpFunc)
@@ -139,7 +162,7 @@ int binarySearch(Vector* vec, void* clave, Comparar cmpFunc)
     if(vec->cantElem == 0) return ERROR;
 
     char* tmpLI = vec->data;
-    char* tmpLS = vec->data - (vec->cantElem) * vec->tamElem;
+    char* tmpLS = vec->data + (vec->cantElem) * vec->tamElem;
     char* tmpMed = tmpLI +  ((tmpLS - tmpLI) / (2 * vec->tamElem)) + vec->tamElem;
     char* tmpOri = vec->data;
 

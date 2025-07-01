@@ -60,7 +60,7 @@ int main()
     mostrarVector(vec, imprimirEmpleados);
     printf("%d\n", (int)vectorBuscar(vec, empl, compararSueldos, LINEAR_SEARCH));
     puts("COPIA");
-    vectorOrdenar(vec, compararSueldos, INSERTION_SORT);
+    vectorOrdenar(vec, compararSueldos, SELECTION_SORT);
     printf("%d\n", vectorBuscar(vec, empl, compararSueldos, BINARY_SEARCH));
     mostrarVector(vec, imprimirEmpleados);
     /*

@@ -1,0 +1,38 @@
+# depslib dependency file v1.0
+1751406673 source:c:\users\lenovo\onedrive\documentos\github\universidad\practicaparcial\secuenciapalabras.c
+	"secuenciaPalabras.h"
+
+1751399678 c:\users\lenovo\onedrive\documentos\github\universidad\practicaparcial\secuenciapalabras.h
+	<stdio.h>
+	"comunes.h"
+
+1751399678 c:\users\lenovo\onedrive\documentos\github\universidad\practicaparcial\comunes.h
+
+1751403054 source:c:\users\lenovo\onedrive\documentos\github\universidad\practicaparcial\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"secuenciaPalabras.h"
+	"vector.h"
+	"funciones.h"
+
+1751403541 c:\users\lenovo\onedrive\documentos\github\universidad\practicaparcial\vector.h
+	"comunes.h"
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1751399694 c:\users\lenovo\onedrive\documentos\github\universidad\practicaparcial\funciones.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"vector.h"
+	"secuenciaPalabras.h"
+	"comunes.h"
+
+1751406970 source:c:\users\lenovo\onedrive\documentos\github\universidad\practicaparcial\funciones.c
+	"funciones.h"
+
+1751403541 source:c:\users\lenovo\onedrive\documentos\github\universidad\practicaparcial\vector.c
+	"vector.h"
+
