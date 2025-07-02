@@ -28,31 +28,31 @@ typedef struct{
 
 typedef int (*TxtABin)(char* , FILE*);
 
-int unirArchivosStock(char* nomArchStock, char* nomArchCambios, char* nomArchTmp); ///A completar
-int procesarProdNuevo(RegCambio* reg, FILE* archCambios, FILE* archTmp);
+int unirArchivosStock(char* nomArchStock, char* nomArchCambios, char* nomArchTmp); ///Hecha
+int procesarProdNuevo(RegCambio* reg, FILE* archCambios, FILE* archTmp);  ///Hecha
 
-int completarProdsNuevos(char* nomArchStock, char* nomArchCompl, char* nomArchTmp);
+int completarProdsNuevos(char* nomArchStock, char* nomArchCompl, char* nomArchTmp); ///Hecha
 
 int trozarRegStock(FILE* arch, char* buffer, void* reg); ///Hecha
 int trozarRegCambio(FILE* arch, char* buffer, void* reg); ///Hecha
-int trozarRegCompl(FILE* arch, char* buffer, void* reg);
+int trozarRegCompl(FILE* arch, char* buffer, void* reg); ///Hecha
 
-int convertirTxtABin(char* nomArchTxt, char* nomArchBin, TxtABin convFunc);
+int convertirTxtABin(char* nomArchTxt, char* nomArchBin, TxtABin convFunc); ///Hecha
 
-int convertirStock(char* reg, FILE* arch);
+int convertirStock(char* reg, FILE* arch);  ///A hacer
 
-int mostrarArchivoTxt(char* nomArchTxt);
+int mostrarArchivoTxt(char* nomArchTxt);  ///Hecha
 int mostrarStockBin(char* nomArchBin);
 
 int main()
 {
-    mostrarArchivoTxt(NOM_ARCH_STOCK);
+    //mostrarArchivoTxt(NOM_ARCH_STOCK);
     unirArchivosStock(NOM_ARCH_STOCK, NOM_ARCH_CAMBIOS, NOM_ARCH_STOCK_TMP);
-    mostrarArchivoTxt(NOM_ARCH_STOCK);
+    //mostrarArchivoTxt(NOM_ARCH_STOCK);
 
     completarProdsNuevos(NOM_ARCH_STOCK, NOM_ARCH_COMPL, NOM_ARCH_STOCK_TMP);
 
-    //convertirTxtABin(NOM_ARCH_STOCK, NOM_ARCH_STOCK_BIN, convertirStock);
+    convertirTxtABin(NOM_ARCH_STOCK, NOM_ARCH_STOCK_BIN, convertirStock);
 
     //mostrarStockBin(NOM_ARCH_STOCK_BIN);
 
@@ -117,7 +117,8 @@ int unirArchivosStock(char* nomArchStock, char* nomArchCambios, char* nomArchTmp
     fclose(archStock);
     fclose(archTmp);
 
-    ///Despues voy a poner para que sobreescriba el archivo, quiero ver que este todo bien
+    remove(nomArchStock);
+    rename(nomArchTmp, nomArchStock);
 
     return 0;
 }
@@ -197,11 +198,11 @@ int mostrarArchivoTxt(char* nomArchTxt)
 
     RegStock reg;
 
-    fscanf(arch, "%d;%[^;];%d\n", &reg.legajo, reg.nom, &reg.stock);
+    //fscanf(arch, "%d;%[^;];%d\n", &reg.legajo, reg.nom, &reg.stock);
 
     while(!feof(arch)){
-        printf("Legajo: %d  Nombre: %s  Stock: %d\n", reg.legajo, reg.nom, reg.stock);
         fscanf(arch, "%d;%[^;];%d\n", &reg.legajo, reg.nom, &reg.stock);
+        printf("Legajo: %d  Nombre: %s  Stock: %d\n", reg.legajo, reg.nom, reg.stock);
     }
 
     fclose(arch);
@@ -241,16 +242,16 @@ int completarProdsNuevos(char* nomArchStock, char* nomArchCompl, char* nomArchTm
     while(!feof(archStock) && !feof(archCompl)){
         comp = stockTmp.legajo - complTmp.legajo;
 
-        if(comp == 0){
+        if(comp == 0){ ///Si hay un elemento en el stock igual a uno del archivo de nuevos productos
             strcpy(stockTmp.nom, complTmp.nom);
             fprintf(archTmp, "%d;%s;%d\n", stockTmp.legajo, stockTmp.nom, stockTmp.stock);
             trozarRegStock(archStock, buffer, &stockTmp);
-        }else if(comp < 0){
-
-
-        }else{
+            trozarRegCompl(archCompl, buffer, &complTmp);
+        }else if(comp < 0){ ///Aun no llegamos a un legajo igual
             fprintf(archTmp, "%d;%s;%d\n", stockTmp.legajo, stockTmp.nom, stockTmp.stock);
             trozarRegStock(archStock, buffer, &stockTmp);
+        }else{ ///Nos pasamos
+            return 6;
         }
     }
 
@@ -260,12 +261,15 @@ int completarProdsNuevos(char* nomArchStock, char* nomArchCompl, char* nomArchTm
     }
 
     if(!feof(archCompl)){
-
+        return 6;
     }
 
     fclose(archStock);
     fclose(archCompl);
     fclose(archTmp);
+
+    remove(nomArchStock);
+    rename(nomArchTmp, nomArchStock);
 
     return 0;
 }
@@ -287,6 +291,69 @@ int trozarRegCompl(FILE* arch, char* buffer, void* reg)
     *cursor = '\0';
 
     sscanf(buffer, "%d", &tmp->legajo);
+
+    return 0;
+}
+
+int convertirTxtABin(char* nomArchTxt, char* nomArchBin, TxtABin convFunc)
+{
+    FILE* archTxt = fopen(nomArchTxt, "rt");
+
+    if(!archTxt) return 1;
+
+    FILE* archBin = fopen(nomArchBin, "wb");
+
+    if(!archBin){
+        fclose(archTxt);
+        return 1;
+    }
+
+    char buffer[TAM_LINEA];
+
+    while(!feof(archTxt)){
+        fgets(buffer, TAM_LINEA, archTxt);
+
+        convFunc(buffer, archBin);
+    }
+
+    fclose(archTxt);
+    fclose(archBin);
+
+    return 0;
+}
+
+
+int convertirStock(char* reg, FILE* arch)
+{
+    RegStock tmp;
+    puts(reg);
+
+    trozarRegStock(arch, reg, &tmp);
+
+    printf("%d;%s;%d\n", tmp.legajo, tmp.nom, tmp.stock);
+
+    fwrite(&tmp, sizeof(RegStock), 1, arch);
+
+    return 0;
+}
+
+int mostrarStockBin(char* nomArchBin)
+{
+    FILE* arch = fopen(nomArchBin, "rb");
+
+    if(!arch) return 1;
+
+    RegStock reg;
+
+    fread(&reg, sizeof(RegStock), 1, arch);
+    printf("Legajo: %d  Nombre: %s  Stock:  %d\n", reg.legajo, reg.nom, reg.stock);
+
+    while(!feof(arch)){
+        fread(&reg, sizeof(RegStock), 1, arch);
+        printf("Legajo: %d  Nombre: %s  Stock:  %d\n", reg.legajo, reg.nom, reg.stock);
+    }
+
+    fclose(arch);
 
     return 0;
 }
