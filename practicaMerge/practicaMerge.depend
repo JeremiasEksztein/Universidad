@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1751470371 source:c:\users\lenovo\onedrive\documentos\github\universidad\practicamerge\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+

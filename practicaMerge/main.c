@@ -84,7 +84,7 @@ int unirArchivosStock(char* nomArchStock, char* nomArchCambios, char* nomArchTmp
         if(comp == 0){ ///Registro de producto con sus registros de movimiento
             stockTmp.stock += cambioTmp.mov;
             trozarRegCambio(archCambios, buffer, &cambioTmp);
-        }else if(comp > 0){ ///Cambio sin producto
+        }else if(comp < 0){ ///Cambio sin producto
             fprintf(archTmp, "%d;%s;%d\n", stockTmp.legajo, stockTmp.nom, stockTmp.stock);
             trozarRegStock(archStock, buffer, &stockTmp);
         }else{ ///Producto sin cambio
