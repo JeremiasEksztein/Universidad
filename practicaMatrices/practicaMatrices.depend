@@ -1,0 +1,12 @@
+# depslib dependency file v1.0
+1584205420 source:c:\users\lenovo\onedrive\documentos\github\universidad\practicamatrices\main.c
+	<stdio.h>
+	<stdlib.h>
+
+1751461225 source:c:\users\lenovo\onedrive\documentos\github\universidad\practicamatrices\matrices.c
+	"matrices.h"
+
+1751461156 c:\users\lenovo\onedrive\documentos\github\universidad\practicamatrices\matrices.h
+	<stdio.h>
+	<stdlib.h>
+
