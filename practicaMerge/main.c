@@ -7,6 +7,7 @@
 #define NOM_ARCH_STOCK "stock.csv"///Leemos de este
 #define NOM_ARCH_CAMBIOS "cambios.csv" ///Leemos de este
 #define NOM_ARCH_STOCK_TMP "stock.tmp" ///Usamos como auxiliar
+#define NOM_ARCH_COMPL "prodNuevos.csv" ///Usamos este para completar los registros nuevos
 #define NOM_ARCH_STOCK_BIN "stock.dat" ///Guardamos finalmente en este
 
 typedef struct{
@@ -20,13 +21,21 @@ typedef struct{
     int mov;
 }RegCambio;
 
+typedef struct{
+    int legajo;
+    char nom[30];
+}RegCompl;
+
 typedef int (*TxtABin)(char* , FILE*);
 
 int unirArchivosStock(char* nomArchStock, char* nomArchCambios, char* nomArchTmp); ///A completar
 int procesarProdNuevo(RegCambio* reg, FILE* archCambios, FILE* archTmp);
 
+int completarProdsNuevos(char* nomArchStock, char* nomArchCompl, char* nomArchTmp);
+
 int trozarRegStock(FILE* arch, char* buffer, void* reg); ///Hecha
 int trozarRegCambio(FILE* arch, char* buffer, void* reg); ///Hecha
+int trozarRegCompl(FILE* arch, char* buffer, void* reg);
 
 int convertirTxtABin(char* nomArchTxt, char* nomArchBin, TxtABin convFunc);
 
@@ -40,6 +49,8 @@ int main()
     mostrarArchivoTxt(NOM_ARCH_STOCK);
     unirArchivosStock(NOM_ARCH_STOCK, NOM_ARCH_CAMBIOS, NOM_ARCH_STOCK_TMP);
     mostrarArchivoTxt(NOM_ARCH_STOCK);
+
+    completarProdsNuevos(NOM_ARCH_STOCK, NOM_ARCH_COMPL, NOM_ARCH_STOCK_TMP);
 
     //convertirTxtABin(NOM_ARCH_STOCK, NOM_ARCH_STOCK_BIN, convertirStock);
 
@@ -84,10 +95,10 @@ int unirArchivosStock(char* nomArchStock, char* nomArchCambios, char* nomArchTmp
         if(comp == 0){ ///Registro de producto con sus registros de movimiento
             stockTmp.stock += cambioTmp.mov;
             trozarRegCambio(archCambios, buffer, &cambioTmp);
-        }else if(comp < 0){ ///Cambio sin producto
+        }else if(comp < 0){ ///Producto sin movimiento
             fprintf(archTmp, "%d;%s;%d\n", stockTmp.legajo, stockTmp.nom, stockTmp.stock);
             trozarRegStock(archStock, buffer, &stockTmp);
-        }else{ ///Producto sin cambio
+        }else{ ///Movimiento sin producto
             procesarProdNuevo(&cambioTmp, archCambios, archTmp);
         }
 
@@ -194,6 +205,88 @@ int mostrarArchivoTxt(char* nomArchTxt)
     }
 
     fclose(arch);
+
+    return 0;
+}
+
+int completarProdsNuevos(char* nomArchStock, char* nomArchCompl, char* nomArchTmp)
+{
+    FILE* archStock = fopen(nomArchStock, "rt");
+
+    if(!archStock) return 1;
+
+    FILE* archCompl = fopen(nomArchCompl, "rt");
+
+    if(!archCompl){
+        fclose(archStock);
+        return 1;
+    }
+
+    FILE* archTmp = fopen(nomArchTmp, "wt");
+
+    if(!archTmp){
+        fclose(archStock);
+        fclose(archCompl);
+        return 1;
+    }
+
+    RegStock stockTmp;
+    RegCompl complTmp;
+    char buffer[TAM_LINEA];
+    int comp;
+
+    trozarRegStock(archStock, buffer, &stockTmp);
+    trozarRegCompl(archCompl, buffer, &complTmp);
+
+    while(!feof(archStock) && !feof(archCompl)){
+        comp = stockTmp.legajo - complTmp.legajo;
+
+        if(comp == 0){
+            strcpy(stockTmp.nom, complTmp.nom);
+            fprintf(archTmp, "%d;%s;%d\n", stockTmp.legajo, stockTmp.nom, stockTmp.stock);
+            trozarRegStock(archStock, buffer, &stockTmp);
+        }else if(comp < 0){
+
+
+        }else{
+            fprintf(archTmp, "%d;%s;%d\n", stockTmp.legajo, stockTmp.nom, stockTmp.stock);
+            trozarRegStock(archStock, buffer, &stockTmp);
+        }
+    }
+
+    if(!feof(archStock)){
+        fprintf(archTmp, "%d;%s;%d\n", stockTmp.legajo, stockTmp.nom, stockTmp.stock);
+        trozarRegStock(archStock, buffer, &stockTmp);
+    }
+
+    if(!feof(archCompl)){
+
+    }
+
+    fclose(archStock);
+    fclose(archCompl);
+    fclose(archTmp);
+
+    return 0;
+}
+
+int trozarRegCompl(FILE* arch, char* buffer, void* reg)
+{
+    RegCompl* tmp = (RegCompl*) reg;
+    char* cursor = buffer;
+
+    fgets(buffer, TAM_LINEA, arch);
+
+    if((cursor = strrchr(buffer, '\n')) == NULL) return 2;
+
+    *cursor = '\0';
+
+    if((cursor = strrchr(buffer, ';')) == NULL) return 3;
+
+    sscanf(cursor + 1, "%s", tmp->nom);
+    *cursor = '\0';
+
+    sscanf(buffer, "%d", &tmp->legajo);
 
     return 0;
 }
