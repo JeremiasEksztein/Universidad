@@ -26,6 +26,7 @@ int bubbleSort(Vector* vec, Comparar cmpFunc)
     return EXITO;
 }
 
+/*
 int selectionSort(Vector* vec, Comparar cmpFunc)
 {
     char* i = vec->data;
@@ -47,6 +48,7 @@ int selectionSort(Vector* vec, Comparar cmpFunc)
 
     return EXITO;
 }
+*/
 
 
 /*
@@ -71,7 +73,49 @@ int selectionSort(Vector* vec, Comparar cmpFunc)
     return EXITO;
 }*/
 
-//Probado
+int selectionSort(Vector* vec, Comparar cmpFunc)
+{
+    char* i;
+    char* j;
+    char* ult = vec->data + (vec->cantElem - 1) * vec->tamElem;
+    char* min;
+
+    for(i = vec->data; i < ult; i += vec->tamElem){
+        min = i;
+
+        for(j = i + vec->tamElem; j < (ult + vec->tamElem); j += vec->tamElem){
+            if(cmpFunc(j, min) < 0){
+                min = j;
+            }
+        }
+
+        intercambiar(i, min, vec->tamElem);
+    }
+
+    return EXITO;
+}
+
+int insertionSort(Vector* vec, Comparar cmpFunc)
+{
+    char* i = vec->data + vec->tamElem;
+    char* j = NULL;
+    char* ult = vec->data + vec->cantElem * vec->tamElem;
+    char* ori = vec->data;
+
+    while(i < ult){
+        j = i;
+        while(j > ori && cmpFunc(j - vec->tamElem, j) > 0){
+            intercambiar(j, j - vec->tamElem, vec->tamElem);
+            j -= vec->tamElem;
+        }
+
+        i += vec->tamElem;
+    }
+
+    return EXITO;
+}
+
+/*
 int insertionSort(Vector* vec, Comparar cmpFunc)
 {
     char* ori = vec->data;
@@ -89,7 +133,7 @@ int insertionSort(Vector* vec, Comparar cmpFunc)
         i += vec->tamElem;
     }
 
-    /*
+
 
 
     char* tmpUlt = vec->data + (vec->cantElem - 1) * vec->tamElem;
@@ -113,10 +157,12 @@ int insertionSort(Vector* vec, Comparar cmpFunc)
     }
 
     free(tmpElem);
-    */
+
 
     return EXITO;
 }
+
+*/
 
 //Probado
 int linearSearch(Vector* vec, void* clave, Comparar cmpFunc)
@@ -138,7 +184,31 @@ int linearSearch(Vector* vec, void* clave, Comparar cmpFunc)
 
 int binarySearch(Vector* vec, void* clave, Comparar cmpFunc)
 {
-    /*
+    char* ori = vec->data;
+    char* li = vec->data;
+    char* ls = vec->data + (vec->cantElem - 1) * vec->tamElem;
+    char* med = li + ((ls - li) / (2 * vec->tamElem)) * vec->tamElem;
+
+    while(li <= ls && cmpFunc(med, clave) != 0){
+        if(cmpFunc(med, clave) > 0){
+            ls = med - vec->tamElem;
+        }else{
+            li = med + vec->tamElem;
+        }
+
+        med = li + ((ls - li) / (2 * vec->tamElem)) * vec->tamElem;
+    }
+
+    if(li > ls){
+        return -1;
+    }
+
+    return ((med - ori) / vec->tamElem);
+}
+
+/*
+int binarySearch(Vector* vec, void* clave, Comparar cmpFunc)
+{
     char* ori = vec->data;
     char* li = vec->data;
     char* ls = vec->data - (vec->cantElem) * vec->tamElem;
@@ -156,7 +226,7 @@ int binarySearch(Vector* vec, void* clave, Comparar cmpFunc)
     }
 
     return -1;
-*/
+
 
 
     if(vec->cantElem == 0) return ERROR;
@@ -183,6 +253,7 @@ int binarySearch(Vector* vec, void* clave, Comparar cmpFunc)
     return (tmpMed - tmpOri);
 }
 
+*/
 /*Probado*/
 Vector* crearVector(Vector* vec, size_t tamElem)
 {

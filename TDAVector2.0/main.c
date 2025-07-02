@@ -51,7 +51,7 @@ int main()
 
     Empleado* empl = NULL;
 
-    Empleado a = {"Jeremias", "Eksztein", 00, 50000};
+    Empleado a = {"Alan", "Martinez", 1001, 46000.0};
 
     empl = &a;
 
@@ -60,21 +60,9 @@ int main()
     mostrarVector(vec, imprimirEmpleados);
     printf("%d\n", (int)vectorBuscar(vec, empl, compararSueldos, LINEAR_SEARCH));
     puts("COPIA");
-    vectorOrdenar(vec, compararSueldos, SELECTION_SORT);
+    vectorOrdenar(vec, compararSueldos, INSERTION_SORT);
     printf("%d\n", vectorBuscar(vec, empl, compararSueldos, BINARY_SEARCH));
     mostrarVector(vec, imprimirEmpleados);
-    /*
-
-    puts("Copia");
-
-    vectorReiniciarCursor(vec);
-
-    while(!vectorCursorAlFinal(vec)){
-        vectorLeer(vec, empl);
-        imprimirEmpleados(empl);
-    }
-    */
-
 
     destruirVector(vec);
 
