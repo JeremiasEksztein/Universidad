@@ -11,6 +11,7 @@ typedef struct{
 
 void imprimirEmpleados(const void* empl);
 int compararSueldos(const void* emplA, const void* emplB);
+int compararLegajos(const void* emplA, const void* emplB);
 void accionEmpleados(void* empl);
 
 int main()
@@ -51,7 +52,7 @@ int main()
 
     Empleado* empl = NULL;
 
-    Empleado a = {"Alan", "Martinez", 1001, 46000.0};
+    Empleado a = {"Alan", "Martinez", 1017, 52000.0};
 
     empl = &a;
 
@@ -61,7 +62,7 @@ int main()
     printf("%d\n", (int)vectorBuscar(vec, empl, compararSueldos, LINEAR_SEARCH));
     puts("COPIA");
     vectorOrdenar(vec, compararSueldos, INSERTION_SORT);
-    printf("%d\n", vectorBuscar(vec, empl, compararSueldos, BINARY_SEARCH));
+    printf("%d\n", vectorBuscar(vec, empl, compararLegajos, BINARY_SEARCH));
     mostrarVector(vec, imprimirEmpleados);
 
     destruirVector(vec);
@@ -74,6 +75,16 @@ void imprimirEmpleados(const void* empl)
     const Empleado* tmp = empl;
 
     printf("%s - %s - %d - %0.2lf\n", tmp->nom, tmp->ape, tmp->legajo, tmp->sueldo);
+}
+
+int compararLegajos(const void* emplA, const void* emplB)
+{
+    const Empleado* tmpA = emplA;
+    const Empleado* tmpB = emplB;
+
+    int dif = tmpA->legajo - tmpB->legajo;
+
+    return dif;
 }
 
 int compararSueldos(const void* emplA, const void* emplB)

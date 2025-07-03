@@ -12,3 +12,16 @@
 	<stdlib.h>
 	<stdio.h>
 
+1751470371 source:c:\users\lenovo\onedrive\documentos\github\universidad\unidad1matrices\main.c
+	<stdio.h>
+	<time.h>
+	<stdlib.h>
+	"matrices.h"
+
+1751470371 c:\users\lenovo\onedrive\documentos\github\universidad\unidad1matrices\matrices.h
+	<stdlib.h>
+	<stdio.h>
+
+1751470371 source:c:\users\lenovo\onedrive\documentos\github\universidad\unidad1matrices\matrices.c
+	"matrices.h"
+

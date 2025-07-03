@@ -1,13 +1,13 @@
 # depslib dependency file v1.0
-1751422321 source:c:\users\lenovo\onedrive\documentos\github\universidad\tdavector2.0\main.c
+1751538070 source:c:\users\lenovo\onedrive\documentos\github\universidad\tdavector2.0\main.c
 	<stdio.h>
 	<stdlib.h>
 	"vector.h"
 
-1751422311 source:c:\users\lenovo\onedrive\documentos\github\universidad\tdavector2.0\vector.c
+1751470371 source:c:\users\lenovo\onedrive\documentos\github\universidad\tdavector2.0\vector.c
 	"vector.h"
 
-1750882241 c:\users\lenovo\onedrive\documentos\github\universidad\tdavector2.0\vector.h
+1751470371 c:\users\lenovo\onedrive\documentos\github\universidad\tdavector2.0\vector.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>

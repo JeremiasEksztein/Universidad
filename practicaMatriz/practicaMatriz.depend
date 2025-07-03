@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1751492512 source:c:\users\lenovo\onedrive\documentos\github\universidad\practicamatriz\main.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+
